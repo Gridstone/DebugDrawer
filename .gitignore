@@ -1,0 +1,19 @@
+# Generated files
+bin/
+gen/
+out/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Mac poop
+.DS_Store
+
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle
+.idea
+*.iml
+
+# Gradle cache
+.gradle

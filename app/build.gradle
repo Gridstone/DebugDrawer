@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion versions.compile_sdk
+
+  defaultConfig {
+    applicationId "au.com.gridstone.debugdrawer"
+    minSdkVersion versions.min_sdk
+    targetSdkVersion versions.compile_sdk
+    versionCode 1
+    versionName "1.0"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+}
+
+dependencies {
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+  implementation project(':debug-drawer')
+}

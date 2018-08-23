@@ -1,0 +1,15 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+  compileSdkVersion versions.compile_sdk
+
+  defaultConfig {
+    minSdkVersion versions.min_sdk
+    targetSdkVersion versions.compile_sdk
+  }
+
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+}

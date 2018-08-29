@@ -4,7 +4,8 @@ buildscript {
       'compile_sdk'           : 28,
       'min_sdk'               : 21,
       'android_gradle_plugin' : '3.2.0-rc02',
-      'kotlin'                : '1.2.61'
+      'kotlin'                : '1.2.61',
+      'drawerlayout'          : '1.0.0-rc02'
   ]
 
   repositories {

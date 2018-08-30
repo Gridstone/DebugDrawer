@@ -54,7 +54,8 @@ object DebugDrawer {
       val insetListener = InsetListener(drawerContentScrollView, drawerContent)
       mainContainer.setOnApplyWindowInsetsListener(insetListener)
 
-      //
+      // Set the DrawerLayout as the root view for the Activity and return the container the
+      // Activity can use to push and pop views.
       activity.setContentView(drawerLayout)
       return mainContainer
     }

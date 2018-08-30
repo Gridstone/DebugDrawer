@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <style name="Theme.DebugDrawer" parent="android:Theme.Material">
+    <item name="android:textAppearance">@style/TextAppearance.DebugDrawer</item>
+  </style>
+
+  <style name="TextAppearance.DebugDrawer" parent="android:TextAppearance.Material">
+    <item name="android:fontFamily">monospace</item>
+  </style>
+</resources>

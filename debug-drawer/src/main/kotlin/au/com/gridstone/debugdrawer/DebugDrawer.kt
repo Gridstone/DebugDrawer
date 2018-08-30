@@ -1,18 +1,17 @@
 package au.com.gridstone.debugdrawer
 
 import android.app.Activity
+import android.content.res.Resources
 import android.graphics.Color
+import android.view.ContextThemeWrapper
 import android.view.Gravity.END
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnApplyWindowInsetsListener
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.WindowInsets
 import android.widget.FrameLayout
-import android.widget.LinearLayout
-import android.widget.LinearLayout.VERTICAL
-import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 
 object DebugDrawer {
@@ -35,18 +34,20 @@ object DebugDrawer {
       val drawerLayout = DrawerLayout(activity)
       drawerLayout.addView(mainContainer)
 
+      val themedContext = ContextThemeWrapper(activity, R.style.Theme_DebugDrawer)
+
       // Create the ScrollView that will house the debug drawer content and add it to DrawerLayout.
-      val drawerContentScrollView = DrawerScrollView(activity)
+      val drawerContentScrollView = DrawerScrollView(themedContext)
       val params = DrawerLayout.LayoutParams(drawerLayout.dpToPx(290), MATCH_PARENT, END)
       drawerContentScrollView.layoutParams = params
       drawerContentScrollView.setBackgroundColor(Color.rgb(66, 66, 66))
       drawerLayout.addView(drawerContentScrollView)
 
       // Create and add the drawer content container to the scroll view.
-      val drawerContent = LinearLayout(activity)
-      drawerContent.layoutParams = LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-      drawerContent.orientation = VERTICAL
-      drawerContent.addView(TextView(activity).apply { setText("Hello") })
+      val inflater = LayoutInflater.from(themedContext)
+      val drawerContent: ViewGroup = inflater
+          .inflate(R.layout.drawer_content, drawerContentScrollView, false) as ViewGroup
+
       drawerContentScrollView.addView(drawerContent)
 
       // If the main container is dealing with window insets then we want to know. It will
@@ -67,7 +68,17 @@ object DebugDrawer {
 
     override fun onApplyWindowInsets(v: View, insets: WindowInsets): WindowInsets {
       scrollView.setStatusBarHeight(insets.systemWindowInsetTop)
-      drawerContentContainer.setPadding(0, insets.systemWindowInsetTop, 0, 0)
+
+      val resources: Resources = v.resources
+      val horizontalPadding: Int = resources.getDimensionPixelSize(R.dimen.drawerHorizontalPadding)
+      val verticalPadding: Int = resources.getDimensionPixelSize(R.dimen.drawerVerticalPadding)
+
+      drawerContentContainer.setPadding(
+          horizontalPadding,
+          verticalPadding + insets.systemWindowInsetTop,
+          horizontalPadding,
+          verticalPadding)
+
       return insets
     }
   }

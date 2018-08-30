@@ -1,13 +1,16 @@
 package au.com.gridstone.debugdrawer
 
 import android.app.Activity
+import android.app.Application.ActivityLifecycleCallbacks
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.Gravity.END
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnApplyWindowInsetsListener
+import android.view.View.OnAttachStateChangeListener
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.WindowInsets
@@ -70,9 +73,11 @@ object DebugDrawer {
       val insetListener = InsetListener(drawerContentScrollView, drawerContent)
       mainContainer.setOnApplyWindowInsetsListener(insetListener)
 
-      // Set the DrawerLayout as the root view for the Activity and return the container the
-      // Activity can use to push and pop views.
+      // Add the DrawerLayout to the activity, register lifecycle callbacks to inform modules of
+      // attach/detach events, and return the main container the activity can use to push and
+      // pop screen views.
       activity.setContentView(drawerLayout)
+      activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules))
       return mainContainer
     }
   }
@@ -96,5 +101,29 @@ object DebugDrawer {
 
       return insets
     }
+  }
+
+  private class LifecycleListener(private val modules: Set<DebugDrawerModule>) : ActivityLifecycleCallbacks {
+
+    override fun onActivityStarted(activity: Activity) {
+      for (module in modules) {
+        module.onAttach(activity)
+      }
+    }
+
+    override fun onActivityStopped(activity: Activity) {
+      for (module in modules) {
+        module.onDetach(activity)
+      }
+    }
+
+    override fun onActivityDestroyed(activity: Activity) {
+      activity.application.unregisterActivityLifecycleCallbacks(this)
+    }
+
+    override fun onActivityPaused(activity: Activity?) {}
+    override fun onActivityResumed(activity: Activity?) {}
+    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
+    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {}
   }
 }

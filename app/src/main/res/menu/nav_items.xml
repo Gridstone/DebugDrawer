@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <item
+      android:icon="@drawable/ic_filter_1"
+      android:title="Page 1"
+      />
+
+  <item
+      android:icon="@drawable/ic_filter_2"
+      android:title="Page 2"
+      />
+
+  <item
+      android:icon="@drawable/ic_filter_3"
+      android:title="Page 3"
+      />
+
+  <item
+      android:icon="@drawable/ic_filter_4"
+      android:title="Page 4"
+      />
+
+  <item
+      android:icon="@drawable/ic_filter_5"
+      android:title="Page 5"
+      />
+
+</menu>

@@ -12,7 +12,7 @@
       android:label="Debug Drawer Sample"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:supportsRtl="true"
-      android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
+      android:theme="@style/Theme.DrawerLayout.SampleApp"
       tools:ignore="GoogleAppIndexingWarning"
       >
 

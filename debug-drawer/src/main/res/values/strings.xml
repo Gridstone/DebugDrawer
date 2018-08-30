@@ -2,4 +2,11 @@
 
 <resources>
   <string name="drawer_title">Development settings</string>
+
+  <string name="drawer_deviceInfo_title">Device information</string>
+  <string name="drawer_deviceInfo_make">Make</string>
+  <string name="drawer_deviceInfo_model">Model</string>
+  <string name="drawer_deviceInfo_resolution">Resolution</string>
+  <string name="drawer_deviceInfo_density">Density</string>
+  <string name="drawer_deviceInfo_api">API level</string>
 </resources>

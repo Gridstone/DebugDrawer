@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 
-interface DrawerModule {
+interface DebugDrawerModule {
+  val title: String
+
   fun onAttach(context: Context) {}
   fun onDetach(context: Context) {}
   fun onCreateView(parent: ViewGroup): View

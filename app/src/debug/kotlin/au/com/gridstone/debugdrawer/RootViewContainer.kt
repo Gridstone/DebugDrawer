@@ -4,5 +4,7 @@ import android.app.Activity
 import android.view.ViewGroup
 
 fun getRootViewContainerFor(activity: Activity): ViewGroup {
-  return DebugDrawer.with(activity).finishAndGetMainContainer()
+  return DebugDrawer.with(activity)
+      .add(DeviceInfoModule(activity))
+      .finishAndGetMainContainer()
 }

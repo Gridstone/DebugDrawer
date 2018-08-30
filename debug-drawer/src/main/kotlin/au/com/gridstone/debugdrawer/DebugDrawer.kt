@@ -12,21 +12,26 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.WindowInsets
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 
 object DebugDrawer {
+
   fun with(activity: Activity): Builder = Builder(activity)
 
   class Builder internal constructor(private val activity: Activity) {
 
+    private val modules: MutableSet<DebugDrawerModule> = LinkedHashSet(5)
     private var mainContainer: ViewGroup = FrameLayout(activity)
 
-    fun overrideMainContainer(viewGroup: ViewGroup) {
+    fun overrideMainContainer(viewGroup: ViewGroup): Builder {
       mainContainer = viewGroup
+      return this
     }
 
-    fun add(module: DrawerModule) {
-      TODO("Add module.")
+    fun add(module: DebugDrawerModule): Builder {
+      modules.add(module)
+      return this
     }
 
     fun finishAndGetMainContainer(): ViewGroup {
@@ -35,6 +40,7 @@ object DebugDrawer {
       drawerLayout.addView(mainContainer)
 
       val themedContext = ContextThemeWrapper(activity, R.style.Theme_DebugDrawer)
+      val inflater = LayoutInflater.from(themedContext)
 
       // Create the ScrollView that will house the debug drawer content and add it to DrawerLayout.
       val drawerContentScrollView = DrawerScrollView(themedContext)
@@ -44,11 +50,20 @@ object DebugDrawer {
       drawerLayout.addView(drawerContentScrollView)
 
       // Create and add the drawer content container to the scroll view.
-      val inflater = LayoutInflater.from(themedContext)
       val drawerContent: ViewGroup = inflater
           .inflate(R.layout.drawer_content, drawerContentScrollView, false) as ViewGroup
 
       drawerContentScrollView.addView(drawerContent)
+
+      // Add all modules to the content view.
+      for (module in modules) {
+        val titleView: TextView =
+            inflater.inflate(R.layout.drawer_module_title, drawerContent, false) as TextView
+
+        titleView.text = module.title
+        drawerContent.addView(titleView)
+        drawerContent.addView(module.onCreateView(drawerContent))
+      }
 
       // If the main container is dealing with window insets then we want to know. It will
       // potentially allow us to render the debug drawer behind the status bar.

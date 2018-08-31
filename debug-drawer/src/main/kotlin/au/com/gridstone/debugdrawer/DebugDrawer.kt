@@ -5,6 +5,7 @@ import android.app.Application.ActivityLifecycleCallbacks
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.ContextThemeWrapper
 import android.view.Gravity.END
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.WindowInsets
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
 
 object DebugDrawer {
@@ -23,16 +25,29 @@ object DebugDrawer {
 
   class Builder internal constructor(private val activity: Activity) {
 
-    private val modules: MutableSet<DebugDrawerModule> = LinkedHashSet(5)
     private var mainContainer: ViewGroup = FrameLayout(activity)
+    private var index = 0
+    private val sectionTitles = SparseArray<String>(5)
+    private val modules = SparseArray<DebugDrawerModule>(5)
 
     fun overrideMainContainer(viewGroup: ViewGroup): Builder {
       mainContainer = viewGroup
       return this
     }
 
-    fun add(module: DebugDrawerModule): Builder {
-      modules.add(module)
+    fun addSectionTitle(title: String): Builder {
+      sectionTitles.put(index, title)
+      index++
+      return this
+    }
+
+    fun addSectionTitle(@StringRes titleRes: Int): Builder {
+      return addSectionTitle(activity.getString(titleRes))
+    }
+
+    fun addModule(module: DebugDrawerModule): Builder {
+      modules.put(index, module)
+      index++
       return this
     }
 
@@ -57,13 +72,21 @@ object DebugDrawer {
 
       drawerContentScrollView.addView(drawerContent)
 
-      // Add all modules to the content view.
-      for (module in modules) {
-        val titleView: TextView =
-            inflater.inflate(R.layout.drawer_module_title, drawerContent, false) as TextView
+      // Add all section titles and modules to the content view.
+      for (i in 0 until index) {
+        val title: String? = sectionTitles[i]
 
-        titleView.text = module.title
-        drawerContent.addView(titleView)
+        if (title != null) {
+          val titleView: TextView =
+              inflater.inflate(R.layout.drawer_module_title, drawerContent, false) as TextView
+
+          titleView.text = title
+          drawerContent.addView(titleView)
+          continue
+        }
+
+        val module: DebugDrawerModule = modules[i] ?: throw IndexOutOfBoundsException(
+            "Index has no associated title or module.")
         drawerContent.addView(module.onCreateView(drawerContent))
       }
 
@@ -76,7 +99,7 @@ object DebugDrawer {
       // attach/detach events, and return the main container the activity can use to push and pop
       // screen views.
       activity.setContentView(drawerLayout)
-      activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules))
+      activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules.toSet()))
       return mainContainer
     }
   }

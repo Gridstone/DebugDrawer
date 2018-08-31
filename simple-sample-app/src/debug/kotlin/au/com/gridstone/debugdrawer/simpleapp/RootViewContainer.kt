@@ -7,6 +7,7 @@ import au.com.gridstone.debugdrawer.DeviceInfoModule
 
 fun getRootViewContainerFor(activity: Activity): ViewGroup {
   return DebugDrawer.with(activity)
-      .add(DeviceInfoModule(activity))
+      .addSectionTitle("Device information")
+      .addModule(DeviceInfoModule())
       .finishAndGetMainContainer()
 }

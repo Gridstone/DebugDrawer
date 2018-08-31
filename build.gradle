@@ -6,7 +6,8 @@ buildscript {
       'android_gradle_plugin' : '3.2.0-rc02',
       'kotlin'                : '1.2.61',
       'drawerlayout'          : '1.0.0-rc02',
-      'material'              : '1.0.0-rc01'
+      'material'              : '1.0.0-rc01',
+      'leakcanary'            : '1.5.4'
   ]
 
   repositories {

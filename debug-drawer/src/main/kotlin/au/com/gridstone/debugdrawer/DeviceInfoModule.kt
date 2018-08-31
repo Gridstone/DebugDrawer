@@ -13,9 +13,7 @@ import android.util.DisplayMetrics.DENSITY_XHIGH
 import android.util.DisplayMetrics.DENSITY_XXHIGH
 import android.util.DisplayMetrics.DENSITY_XXXHIGH
 
-class DeviceInfoModule(context: Context) : KeyValueDebugDrawerModule() {
-  override val title: String = context.getString(R.string.drawer_deviceInfo_title)
-
+class DeviceInfoModule : KeyValueDebugDrawerModule() {
   override fun getEntries(context: Context): Map<String, String> {
     val resources: Resources = context.resources
     val displayMetrics: DisplayMetrics = resources.displayMetrics

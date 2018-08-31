@@ -31,4 +31,6 @@ dependencies {
   debugImplementation project(':debug-drawer')
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
+  debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+  releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
 }

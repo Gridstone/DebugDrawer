@@ -1,1 +1,1 @@
-include ':debug-drawer', ':sample-app', 'simple-sample-app'
+include ':debug-drawer', ':sample-app', 'simple-sample-app', ':debug-drawer-leakcanary'

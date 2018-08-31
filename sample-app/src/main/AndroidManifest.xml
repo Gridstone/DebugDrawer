@@ -3,7 +3,7 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="au.com.gridstone.debugdrawer"
+    package="au.com.gridstone.debugdrawer.sampleapp"
     >
 
   <application

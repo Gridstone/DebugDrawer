@@ -1,1 +1,1 @@
-include ':app', ':debug-drawer'
+include ':sample-app', ':debug-drawer'

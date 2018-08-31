@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.sampleapp
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import au.com.gridstone.debugdrawer.getRootViewContainerFor
 
 class MainActivity : AppCompatActivity() {
 

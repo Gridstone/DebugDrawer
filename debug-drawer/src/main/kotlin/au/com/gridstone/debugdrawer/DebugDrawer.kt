@@ -54,6 +54,7 @@ object DebugDrawer {
     fun finishAndGetMainContainer(): ViewGroup {
       // Create DrawerLayout and add mainContainer as its first child.
       val drawerLayout = DrawerLayout(activity)
+      drawerLayout.id = R.id.debugDrawerId
       drawerLayout.addView(mainContainer)
 
       val themedContext = ContextThemeWrapper(activity, R.style.Theme_DebugDrawer)
@@ -63,6 +64,7 @@ object DebugDrawer {
       val drawerContentScrollView = DrawerScrollView(themedContext)
       val params = DrawerLayout.LayoutParams(drawerLayout.dpToPx(290), MATCH_PARENT, END)
       drawerContentScrollView.layoutParams = params
+      drawerContentScrollView.id = R.id.debugDrawerId
       drawerContentScrollView.setBackgroundColor(Color.rgb(66, 66, 66))
       drawerLayout.addView(drawerContentScrollView)
 

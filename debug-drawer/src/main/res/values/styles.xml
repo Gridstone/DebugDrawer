@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+  <style name="None"/>
+
   <style name="Theme.DebugDrawer" parent="android:Theme.Material">
     <item name="android:typeface">monospace</item>
   </style>
+
+  <style name="Widget.DebugDrawer.RowWidget" parent="None">
+    <item name="android:minHeight">26dp</item>
+  </style>
+
+  <style name="Widget.DebugDrawer.RowTitle" parent="Widget.DebugDrawer.RowWidget">
+    <item name="android:textColor">?android:attr/textColorSecondary</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:layout_marginEnd">16dp</item>
+    <item name="android:singleLine">true</item>
+  </style>
+
+  <style name="Widget.DebugDrawer.RowValue" parent="Widget.DebugDrawer.RowWidget">
+    <item name="android:textColor">?android:attr/textColorPrimary</item>
+    <item name="android:textSize">14sp</item>
+    <item name="android:singleLine">true</item>
+  </style>
+
 </resources>

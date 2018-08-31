@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import au.com.gridstone.debugdrawer.getRootViewContainerFor
 
 class MainActivity : AppCompatActivity() {
 

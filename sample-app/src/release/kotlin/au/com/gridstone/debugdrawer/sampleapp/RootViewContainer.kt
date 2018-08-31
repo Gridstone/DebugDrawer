@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.sampleapp
 
 import android.app.Activity
 import android.view.ViewGroup

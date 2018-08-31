@@ -10,7 +10,6 @@ import android.view.Gravity.END
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnApplyWindowInsetsListener
-import android.view.View.OnAttachStateChangeListener
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.WindowInsets
@@ -74,8 +73,8 @@ object DebugDrawer {
       mainContainer.setOnApplyWindowInsetsListener(insetListener)
 
       // Add the DrawerLayout to the activity, register lifecycle callbacks to inform modules of
-      // attach/detach events, and return the main container the activity can use to push and
-      // pop screen views.
+      // attach/detach events, and return the main container the activity can use to push and pop
+      // screen views.
       activity.setContentView(drawerLayout)
       activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules))
       return mainContainer
@@ -103,7 +102,8 @@ object DebugDrawer {
     }
   }
 
-  private class LifecycleListener(private val modules: Set<DebugDrawerModule>) : ActivityLifecycleCallbacks {
+  private class LifecycleListener(
+      private val modules: Set<DebugDrawerModule>) : ActivityLifecycleCallbacks {
 
     override fun onActivityStarted(activity: Activity) {
       for (module in modules) {

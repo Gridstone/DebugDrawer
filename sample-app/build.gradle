@@ -28,10 +28,16 @@ android {
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
   debugImplementation project(':debug-drawer')
   debugImplementation project(':debug-drawer-leakcanary')
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
   debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
   releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
+  implementation "com.squareup.moshi:moshi:${versions.moshi}"
+  implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
+  implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+  implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
+  implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${versions.retrofit_coroutines}"
 }

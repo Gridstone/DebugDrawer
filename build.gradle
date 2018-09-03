@@ -12,7 +12,8 @@ buildscript {
       'moshi'                 : '1.6.0',
       'okhttp'                : '3.11.0',
       'retrofit'              : '2.4.0',
-      'retrofit_coroutines'   : '1.0.0'
+      'retrofit_coroutines'   : '1.0.0',
+      'picasso'               : '2.71828'
   ]
 
   repositories {

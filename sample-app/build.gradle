@@ -40,4 +40,5 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
   implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
   implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${versions.retrofit_coroutines}"
+  implementation "com.squareup.picasso:picasso:${versions.picasso}"
 }

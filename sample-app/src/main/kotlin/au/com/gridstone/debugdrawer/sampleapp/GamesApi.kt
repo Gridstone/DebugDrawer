@@ -27,13 +27,10 @@ object GamesApi {
       .create(GiantBombApi::class.java)
 
   suspend fun getGames(): GamesResult {
-
-    @Suppress("LiftReturnOrAssignment") // Keep things readable.
-    try {
-      val response: GamesResponse = api.getGames().await()
-      return GamesResult(true, response.results)
-    } catch (exception: Exception) {
-      return GamesResult(false, emptyList())
+    return try {
+      GamesResult(true, api.getGames().await().results)
+    } catch (e: Exception) {
+      GamesResult(false, emptyList())
     }
   }
 

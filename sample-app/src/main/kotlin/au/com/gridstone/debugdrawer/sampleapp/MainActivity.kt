@@ -52,10 +52,10 @@ class MainActivity : AppCompatActivity() {
     val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
 
     if (cachedGamesList.isNotEmpty()) {
-      viewAnimator.displayedChild = 2
+      viewAnimator.displayedChild = 2 // Display recycler.
       gamesAdapter.set(cachedGamesList)
     } else {
-      viewAnimator.displayedChild = 0
+      viewAnimator.displayedChild = 0 // Display loading.
 
       getGamesJob = launch(UI) {
         val result: GamesResult = GamesApi.getGames()
@@ -63,9 +63,9 @@ class MainActivity : AppCompatActivity() {
         if (result.success) {
           cachedGamesList = result.games
           gamesAdapter.set(result.games)
-          viewAnimator.displayedChild = 2
+          viewAnimator.displayedChild = 2 // Display recycler.
         } else {
-          viewAnimator.displayedChild = 1
+          viewAnimator.displayedChild = 1 // Display error.
         }
       }
     }

@@ -6,6 +6,8 @@
     package="au.com.gridstone.debugdrawer.sampleapp"
     >
 
+  <uses-permission android:name="android.permission.INTERNET"/>
+
   <application
       android:name=".SampleApp"
       android:allowBackup="false"

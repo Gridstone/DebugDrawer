@@ -1,5 +1,6 @@
 package au.com.gridstone.debugdrawer.sampleapp
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import kotlinx.coroutines.experimental.Deferred
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
@@ -23,6 +24,7 @@ object GamesApi {
       .baseUrl(API_URL)
       .client(client)
       .addConverterFactory(MoshiConverterFactory.create())
+      .addCallAdapterFactory(CoroutineCallAdapterFactory())
       .build()
       .create(GiantBombApi::class.java)
 

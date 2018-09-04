@@ -2,4 +2,5 @@
 
 <resources>
   <string name="loading">Loading games…</string>
+  <string name="error">Error fetching games</string>
 </resources>

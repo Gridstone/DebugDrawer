@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string name="drawer_retrofitEndpoint">Endpoint</string>
+  <string name="drawer_retrofitDelay">Delay</string>
+  <string name="drawer_retrofitVariance">Variance</string>
+  <string name="drawer_retrofitFailureRate">Failure rate</string>
+  <string name="drawer_retrofitErrorRate">Error rate</string>
+  <string name="drawer_retrofitErrorCode">Error code</string>
+
+  <string name="drawer_retrofitDelayEntry">%dms</string>
+  <string name="drawer_retrofitVarianceEntry">±%d</string>
+  <string name="drawer_retrofitPercentageNone">None</string>
+  <string name="drawer_retrofitPercentageEntry">%d\%</string>
+  <string name="drawer_retrofitErrorCodeEntry">HTTP %d</string>
+
+</resources>

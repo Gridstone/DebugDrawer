@@ -31,6 +31,7 @@ dependencies {
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
   debugImplementation project(':debug-drawer')
   debugImplementation project(':debug-drawer-leakcanary')
+  debugImplementation project(':debug-drawer-retrofit')
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
   debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"

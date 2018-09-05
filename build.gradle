@@ -13,7 +13,8 @@ buildscript {
       'okhttp'                : '3.11.0',
       'retrofit'              : '2.4.0',
       'retrofit_coroutines'   : '1.0.0',
-      'picasso'               : '2.71828'
+      'picasso'               : '2.71828',
+      'process_phoenix'       : '2.0.0'
   ]
 
   repositories {

@@ -1,1 +1,5 @@
-include ':debug-drawer', ':sample-app', 'simple-sample-app', ':debug-drawer-leakcanary'
+include ':debug-drawer'
+include ':sample-app'
+include ':simple-sample-app'
+include ':debug-drawer-leakcanary'
+include ':debug-drawer-retrofit'

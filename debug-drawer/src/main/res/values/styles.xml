@@ -6,23 +6,30 @@
 
   <style name="Theme.DebugDrawer" parent="android:Theme.Material">
     <item name="android:typeface">monospace</item>
+    <item name="android:spinnerStyle">@style/Widget.DebugDrawer.Spinner</item>
   </style>
 
   <style name="Widget.DebugDrawer.RowWidget" parent="None">
-    <item name="android:minHeight">26dp</item>
+    <item name="android:minHeight">32dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textSize">14sp</item>
   </style>
 
   <style name="Widget.DebugDrawer.RowTitle" parent="Widget.DebugDrawer.RowWidget">
     <item name="android:textColor">?android:attr/textColorSecondary</item>
-    <item name="android:textSize">14sp</item>
     <item name="android:layout_marginEnd">16dp</item>
     <item name="android:singleLine">true</item>
   </style>
 
   <style name="Widget.DebugDrawer.RowValue" parent="Widget.DebugDrawer.RowWidget">
     <item name="android:textColor">?android:attr/textColorPrimary</item>
-    <item name="android:textSize">14sp</item>
     <item name="android:singleLine">true</item>
+  </style>
+
+  <style name="Widget.DebugDrawer.Spinner" parent="android:Widget.Material.Spinner">
+    <item name="android:minHeight">32dp</item>
+    <item name="android:gravity">center_vertical</item>
+    <item name="android:textSize">14sp</item>
   </style>
 
 </resources>

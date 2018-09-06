@@ -13,7 +13,7 @@ internal fun Spinner.onItemSelected(action: (position: Int) -> Unit) {
 
     override fun onNothingSelected(parent: AdapterView<*>?) {}
 
-    override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
       action(position)
     }
   }

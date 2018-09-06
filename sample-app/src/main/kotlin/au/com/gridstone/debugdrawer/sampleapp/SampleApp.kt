@@ -11,5 +11,6 @@ class SampleApp : Application() {
     if (LeakCanary.isInAnalyzerProcess(this)) return
 
     LeakCanary.install(this)
+    AppConfiguration.init(this)
   }
 }

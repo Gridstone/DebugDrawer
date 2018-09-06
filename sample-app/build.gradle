@@ -34,6 +34,9 @@ dependencies {
   debugImplementation project(':debug-drawer-retrofit')
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+  implementation "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
+  implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
   debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
   releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
   implementation "com.squareup.moshi:moshi:${versions.moshi}"
@@ -41,5 +44,6 @@ dependencies {
   implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
   implementation "com.squareup.retrofit2:converter-moshi:${versions.retrofit}"
   implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${versions.retrofit_coroutines}"
+  debugImplementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
   implementation "com.squareup.picasso:picasso:${versions.picasso}"
 }

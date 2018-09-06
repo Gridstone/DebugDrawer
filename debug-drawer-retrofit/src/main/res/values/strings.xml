@@ -12,7 +12,7 @@
   <string name="drawer_retrofitDelayEntry">%dms</string>
   <string name="drawer_retrofitVarianceEntry">±%d</string>
   <string name="drawer_retrofitPercentageNone">None</string>
-  <string name="drawer_retrofitPercentageEntry">%d\%</string>
+  <string name="drawer_retrofitPercentageEntry">%d%%</string>
   <string name="drawer_retrofitErrorCodeEntry">HTTP %d</string>
 
 </resources>

@@ -9,17 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import au.com.gridstone.debugdrawer.sampleapp.AppConfiguration.getRootViewContainerFor
+import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State
 
 class MainActivity : AppCompatActivity() {
-
-  private var getGamesJob: Job? = null
-  private var cachedGamesList: List<Game> = emptyList()
-  private val gamesAdapter = GamesAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -30,53 +27,35 @@ class MainActivity : AppCompatActivity() {
     val home: View = LayoutInflater.from(this).inflate(R.layout.home, container, false)
     container.addView(home)
 
+    // Wire up navigation drawer to open on toolbar button clicks.
     val toolbar: Toolbar = findViewById(R.id.home_toolbar)
     val drawer: DrawerLayout = findViewById(R.id.home_navDrawer)
     toolbar.setNavigationOnClickListener { drawer.openDrawer(GravityCompat.START) }
 
     val recycler: RecyclerView = findViewById(R.id.games_recycler)
-    recycler.adapter = gamesAdapter
+    val adapter = GamesAdapter()
+    recycler.adapter = adapter
     recycler.layoutManager = LinearLayoutManager(this)
 
-    // Not how you'd handle this in a real app, but for a single Activity sample we can cheat
-    // and pass our cached list of games between Activity instances.
-    if (lastCustomNonConfigurationInstance != null) {
-      @Suppress("UNCHECKED_CAST") // We retain List<Game> and nothing else.
-      cachedGamesList = lastCustomNonConfigurationInstance as List<Game>
-    }
+    val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
+    val viewModel: GamesViewModel = ViewModelProviders.of(this).get(GamesViewModel::class.java)
+
+    viewModel.states.observe(this, Observer { state ->
+      when (state) {
+        State.Idle, State.Loading -> viewAnimator.displayedChild = 0
+        State.Error -> viewAnimator.displayedChild = 1
+        is State.Success -> {
+          adapter.set(state.games)
+          viewAnimator.displayedChild = 2
+        }
+      }
+    })
   }
 
   override fun onStart() {
     super.onStart()
 
-    val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
-
-    if (cachedGamesList.isNotEmpty()) {
-      viewAnimator.displayedChild = 2 // Display recycler.
-      gamesAdapter.set(cachedGamesList)
-    } else {
-      viewAnimator.displayedChild = 0 // Display loading.
-
-      getGamesJob = launch(UI) {
-        val result: GamesResult = GamesApi.getGames()
-
-        if (result.success) {
-          cachedGamesList = result.games
-          gamesAdapter.set(result.games)
-          viewAnimator.displayedChild = 2 // Display recycler.
-        } else {
-          viewAnimator.displayedChild = 1 // Display error.
-        }
-      }
-    }
-  }
-
-  override fun onStop() {
-    super.onStop()
-    getGamesJob?.cancel()
-  }
-
-  override fun onRetainCustomNonConfigurationInstance(): Any {
-    return cachedGamesList
+    val viewModel: GamesViewModel = ViewModelProviders.of(this).get(GamesViewModel::class.java)
+    viewModel.refreshIfNecessary()
   }
 }

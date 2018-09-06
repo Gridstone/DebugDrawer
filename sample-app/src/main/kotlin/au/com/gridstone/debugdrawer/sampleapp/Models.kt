@@ -1,6 +1,6 @@
 package au.com.gridstone.debugdrawer.sampleapp
 
-data class GamesResult(val success: Boolean, val games: List<Game>)
+data class GamesResponse(val results: List<Game>)
 
 data class Game(val id: Long,
                 val name: String,

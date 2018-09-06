@@ -36,36 +36,46 @@ class DebugRetrofitConfig(context: Context,
   internal var endpoint: Endpoint
     get() = currentEndpoint
     set(value) {
-      sharedPrefs.putBlocking(KEY_ENDPOINT, value.name)
-      ProcessPhoenix.triggerRebirth(appContext)
+      if (value != currentEndpoint) {
+        sharedPrefs.putBlocking(KEY_ENDPOINT, value.name)
+        ProcessPhoenix.triggerRebirth(appContext)
+      }
     }
 
   internal var delayMs: Long
     get() = networkBehavior.delay(MILLISECONDS)
     set(value) {
-      sharedPrefs.put(KEY_DELAY, value)
-      networkBehavior.setDelay(value, MILLISECONDS)
+      if (value != networkBehavior.delay(MILLISECONDS)) {
+        sharedPrefs.put(KEY_DELAY, value)
+        networkBehavior.setDelay(value, MILLISECONDS)
+      }
     }
 
   internal var variancePercent: Int
     get() = networkBehavior.variancePercent()
     set(value) {
-      sharedPrefs.put(KEY_VARIANCE, value)
-      networkBehavior.setVariancePercent(value)
+      if (value != networkBehavior.variancePercent()) {
+        sharedPrefs.put(KEY_VARIANCE, value)
+        networkBehavior.setVariancePercent(value)
+      }
     }
 
   internal var failurePercent: Int
     get() = networkBehavior.failurePercent()
     set(value) {
-      sharedPrefs.put(KEY_FAILURE_PERCENT, value)
-      networkBehavior.setFailurePercent(value)
+      if (value != networkBehavior.failurePercent()) {
+        sharedPrefs.put(KEY_FAILURE_PERCENT, value)
+        networkBehavior.setFailurePercent(value)
+      }
     }
 
   internal var errorPercent: Int
     get() = networkBehavior.errorPercent()
     set(value) {
-      sharedPrefs.put(KEY_ERROR_PERCENT, value)
-      networkBehavior.setErrorPercent(value)
+      if (value != networkBehavior.errorPercent()) {
+        sharedPrefs.put(KEY_ERROR_PERCENT, value)
+        networkBehavior.setErrorPercent(value)
+      }
     }
 
   internal var errorCode: Int

@@ -46,4 +46,5 @@ dependencies {
   implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${versions.retrofit_coroutines}"
   debugImplementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
   implementation "com.squareup.picasso:picasso:${versions.picasso}"
+  implementation "com.jakewharton.timber:timber:${versions.timber}"
 }

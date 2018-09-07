@@ -22,7 +22,7 @@ class RetrofitModule(private val config: DebugRetrofitConfig) : DebugDrawerModul
       setSelection(initialPos)
 
       onItemSelected { position ->
-        config.endpoint = config.endpoints[position]
+        config.setEndpointAndRelaunch(config.endpoints[position])
       }
     }
 

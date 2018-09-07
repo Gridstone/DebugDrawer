@@ -33,15 +33,6 @@ class DebugRetrofitConfig(context: Context,
     networkBehavior.setErrorFactory(ErrorFactory(sharedPrefs))
   }
 
-  internal var endpoint: Endpoint
-    get() = currentEndpoint
-    set(value) {
-      if (value != currentEndpoint) {
-        sharedPrefs.putBlocking(KEY_ENDPOINT, value.name)
-        ProcessPhoenix.triggerRebirth(appContext)
-      }
-    }
-
   internal var delayMs: Long
     get() = networkBehavior.delay(MILLISECONDS)
     set(value) {
@@ -84,6 +75,17 @@ class DebugRetrofitConfig(context: Context,
       sharedPrefs.put(KEY_ERROR_CODE, value)
       // No need to update error factory since it references sharedPrefs directly.
     }
+
+  /**
+   * Updates the current endpoint and relaunches the entire app. This is necessary as changing
+   * backend environment usually involves invalidating almost all application state.
+   */
+  internal fun setEndpointAndRelaunch(endpoint: Endpoint) {
+    if (endpoint != currentEndpoint) {
+      sharedPrefs.putBlocking(KEY_ENDPOINT, endpoint.name)
+      ProcessPhoenix.triggerRebirth(appContext)
+    }
+  }
 
   private class ErrorFactory(
       private val sharedPrefs: SharedPreferences) : Callable<Response<*>> {

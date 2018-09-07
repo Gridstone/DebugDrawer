@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <color name="log_background">#ffeeeeee</color>
+  <color name="log_accent_debug">#ff2196f3</color>
+  <color name="log_accent_info">#ff4caf50</color>
+  <color name="log_accent_warn">#ffff9800</color>
+  <color name="log_accent_error">#fff44336</color>
+  <color name="log_accent_unknown">#ff9c27b0</color>
+  <color name="log_level_text">#ffffffff</color>
+
+</resources>

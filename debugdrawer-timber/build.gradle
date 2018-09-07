@@ -18,9 +18,8 @@ android {
   }
 
   dependencies {
-    implementation project(':debug-drawer')
+    implementation project(':debugdrawer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-    implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
-    implementation "com.jakewharton:process-phoenix:${versions.process_phoenix}"
+    implementation "com.jakewharton.timber:timber:${versions.timber}"
   }
 }

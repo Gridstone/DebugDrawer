@@ -18,8 +18,8 @@ android {
   }
 
   dependencies {
-    implementation project(':debug-drawer')
+    implementation project(':debugdrawer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-    implementation "com.jakewharton.timber:timber:${versions.timber}"
+    implementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
   }
 }

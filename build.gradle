@@ -3,7 +3,7 @@ buildscript {
   ext.versions = [
       'compile_sdk'           : 28,
       'min_sdk'               : 21,
-      'android_gradle_plugin' : '3.2.0-rc02',
+      'android_gradle_plugin' : '3.2.0-rc03',
       'kotlin'                : '1.2.61',
       'coroutines'            : '0.25.0',
       'androidx_core'         : '1.0.0-rc02',

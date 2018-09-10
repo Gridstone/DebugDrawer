@@ -8,7 +8,7 @@ buildscript {
       'coroutines'            : '0.25.0',
       'androidx_core'         : '1.0.0-rc02',
       'drawerlayout'          : '1.0.0-rc02',
-      'material'              : '1.0.0-rc01',
+      'material'              : '1.0.0-rc02',
       'lifecycle'             : '2.0.0-rc01',
       'leakcanary'            : '1.5.4',
       'moshi'                 : '1.6.0',

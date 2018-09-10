@@ -9,6 +9,7 @@ import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Loading
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Success
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 
 class GamesViewModel : ViewModel() {
 
@@ -33,12 +34,15 @@ class GamesViewModel : ViewModel() {
 
     launch {
 
+      Timber.v("Fetching games list...")
       val api: GamesApi = AppConfiguration.api
 
       try {
         val response: GamesResponse = api.getGames().await()
         mutableStates.postValue(Success(response.results))
-      } catch (_: Exception) {
+        Timber.v("Fetched games list successfully.")
+      } catch (e: Exception) {
+        Timber.e(e, "Something went wrong when fetching games list.")
         mutableStates.postValue(Error)
       }
     }

@@ -21,5 +21,6 @@ android {
     implementation project(':debugdrawer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "com.jakewharton.timber:timber:${versions.timber}"
+    implementation "androidx.core:core:${versions.androidx_core}"
   }
 }

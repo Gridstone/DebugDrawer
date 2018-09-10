@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
 import android.net.Uri
@@ -12,6 +13,7 @@ import android.widget.AbsListView
 import android.widget.AbsListView.OnScrollListener
 import android.widget.Button
 import android.widget.ListView
+import androidx.core.content.FileProvider
 import java.io.File
 
 internal class LogsDialog(context: Context) : AlertDialog(context) {
@@ -71,15 +73,20 @@ internal class LogsDialog(context: Context) : AlertDialog(context) {
       // We couldn't produce a logs file for some reason. Give up.
       if (file == null) return@save
 
+      val uri: Uri = FileProvider.getUriForFile(context,
+                                                "au.com.gridstone.debugdrawer.fileprovider",
+                                                file)
+
       val sendIntent = Intent(ACTION_SEND)
       sendIntent.type = "text/plain"
-      sendIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+      sendIntent.data = uri
+      sendIntent.flags = sendIntent.flags or FLAG_GRANT_READ_URI_PERMISSION
 
       val handlers: List<ResolveInfo> = context.packageManager.queryIntentActivities(sendIntent, 0)
       // Give up if our send intent cannot be handled.
       if (handlers.isEmpty()) return@save
 
-      TODO("Implement file sharing.")
+      context.startActivity(Intent.createChooser(sendIntent, null))
     }
   }
 }

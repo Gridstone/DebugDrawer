@@ -2,7 +2,7 @@ package au.com.gridstone.debugdrawer
 
 import android.app.Application
 import android.os.AsyncTask
-import android.util.Log
+import android.os.Handler
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 import java.io.BufferedWriter
@@ -22,17 +22,36 @@ object LumberYard {
   private val entries: Deque<Entry> = ArrayDeque(BUFFER_SIZE + 1)
 
   private lateinit var app: Application
+  private lateinit var handler: Handler
+  private var listener: ((Entry) -> Unit)? = null
 
   fun install(app: Application) {
     this.app = app
+    handler = Handler(app.mainLooper)
 
-    cleanUp()
+    CleanUpTask.execute()
 
     Timber.plant(object : DebugTree() {
       override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
-        addEntry(Entry(priority, tag, message))
+        val entry = Entry(priority, tag, message)
+        addEntry(entry)
+
+        if (listener != null) {
+          handler.post { listener?.invoke(entry) }
+        }
       }
     })
+  }
+
+  internal fun getEntries(): List<Entry> = entries.toList()
+
+  internal fun setListener(listener: (Entry) -> Unit) {
+    this.listener = listener
+  }
+
+  internal fun clearListener() {
+    listener = null
+    handler.removeCallbacksAndMessages(null)
   }
 
   @Synchronized private fun addEntry(entry: Entry) {
@@ -40,29 +59,8 @@ object LumberYard {
     if (entries.size > BUFFER_SIZE) entries.removeFirst()
   }
 
-  private fun save(callback: (File?) -> Unit) {
+  internal fun save(callback: (File?) -> Unit) {
     SaveTask(callback).execute()
-  }
-
-  private fun cleanUp() {
-    CleanUpTask.execute()
-  }
-
-  private class Entry(val level: Int, val tag: String?, val message: String) {
-    // Indent newlines to match the original indentation.
-    fun prettyPrint() = "%22s %s %s".format(tag, displayLevel(),
-                                            message.replace("\\n".toRegex(),
-                                                            "\n                         "))
-
-    fun displayLevel() = when (level) {
-      Log.VERBOSE -> "V"
-      Log.DEBUG -> "D"
-      Log.INFO -> "I"
-      Log.WARN -> "W"
-      Log.ERROR -> "E"
-      Log.ASSERT -> "A"
-      else -> "?"
-    }
   }
 
   private class SaveTask(private val callback: (File?) -> Unit) : AsyncTask<Unit, Unit, File?>() {
@@ -74,7 +72,7 @@ object LumberYard {
       val filename = "$timestamp.log"
 
       val file = File(folder, filename)
-      val bufferedEntries = ArrayList(entries)
+      val bufferedEntries = entries.toList()
 
       @Suppress("LiftReturnOrAssignment") // Keep things readable.
       try {

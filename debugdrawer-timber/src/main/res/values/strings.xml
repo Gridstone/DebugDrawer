@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+  <string name="drawer_logsButton">View logs</string>
   <string name="drawer_logsTitle">Logs</string>
   <string name="drawer_logsFollow">Follow</string>
   <string name="drawer_logsShare">Share</string>

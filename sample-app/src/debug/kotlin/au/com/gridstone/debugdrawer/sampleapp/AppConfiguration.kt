@@ -9,6 +9,7 @@ import au.com.gridstone.debugdrawer.DeviceInfoModule
 import au.com.gridstone.debugdrawer.Endpoint
 import au.com.gridstone.debugdrawer.LeakCanaryModule
 import au.com.gridstone.debugdrawer.RetrofitModule
+import au.com.gridstone.debugdrawer.TimberModule
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -56,6 +57,7 @@ object AppConfiguration {
         .addSectionTitle("Network")
         .addModule(RetrofitModule(debugRetrofitConfig))
         .addSectionTitle("Logs")
+        .addModule(TimberModule())
         .addModule(LeakCanaryModule())
         .addSectionTitle("Device information")
         .addModule(DeviceInfoModule())

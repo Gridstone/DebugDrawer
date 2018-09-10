@@ -9,6 +9,8 @@
     <item name="android:spinnerStyle">@style/Widget.DebugDrawer.Spinner</item>
   </style>
 
+  <style name="Theme.DebugDrawer.Dialog" parent="android:Theme.Material.Light"/>
+
   <style name="Widget.DebugDrawer.RowWidget" parent="None">
     <item name="android:minHeight">32dp</item>
     <item name="android:gravity">center_vertical</item>

@@ -8,12 +8,13 @@ import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Idle
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Loading
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Success
 import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.JobCancellationException
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 
 class GamesViewModel : ViewModel() {
 
-  private val getGamesJob: Job? = null
+  private var getGamesJob: Job? = null
   private val mutableStates: MutableLiveData<State> = MutableLiveData()
 
   val states: LiveData<State> = mutableStates
@@ -32,7 +33,7 @@ class GamesViewModel : ViewModel() {
     getGamesJob?.cancel()
     mutableStates.value = Loading
 
-    launch {
+    getGamesJob = launch {
 
       Timber.v("Fetching games list...")
       val api: GamesApi = AppConfiguration.api
@@ -41,6 +42,8 @@ class GamesViewModel : ViewModel() {
         val response: GamesResponse = api.getGames().await()
         mutableStates.postValue(Success(response.results))
         Timber.v("Fetched games list successfully.")
+      } catch (_: JobCancellationException) {
+        // Ignore normal job cancellations.
       } catch (e: Exception) {
         Timber.e(e, "Something went wrong when fetching games list.")
         mutableStates.postValue(Error)

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ViewAnimator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.AppConfiguration.getRootViewContainerFor
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State
+import com.squareup.picasso.Picasso
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,13 +45,26 @@ class MainActivity : AppCompatActivity() {
     viewModel.states.observe(this, Observer { state ->
       when (state) {
         State.Idle, State.Loading -> viewAnimator.displayedChild = 0
-        State.Error -> viewAnimator.displayedChild = 1
+
+        State.Error -> {
+          viewAnimator.displayedChild = 1
+          val errorImageView: ImageView = findViewById(R.id.games_error_image)
+          Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+        }
+
         is State.Success -> {
           adapter.set(state.games)
           viewAnimator.displayedChild = 2
         }
       }
     })
+
+    // Put refresh button in toolbar menu and have it refresh the games list.
+    toolbar.inflateMenu(R.menu.home)
+    toolbar.setOnMenuItemClickListener {
+      viewModel.refresh()
+      return@setOnMenuItemClickListener true
+    }
   }
 
   override fun onStart() {

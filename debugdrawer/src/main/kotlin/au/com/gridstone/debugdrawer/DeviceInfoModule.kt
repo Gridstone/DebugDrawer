@@ -13,6 +13,14 @@ import android.util.DisplayMetrics.DENSITY_XHIGH
 import android.util.DisplayMetrics.DENSITY_XXHIGH
 import android.util.DisplayMetrics.DENSITY_XXXHIGH
 
+/**
+ * A simple module that displays
+ *  - Manufacturer
+ *  - Model
+ *  - Screen resolution
+ *  - Screen density
+ *  - Current API version
+ */
 class DeviceInfoModule : KeyValueDebugDrawerModule() {
   override fun getEntries(context: Context): Map<String, String> {
     val resources: Resources = context.resources

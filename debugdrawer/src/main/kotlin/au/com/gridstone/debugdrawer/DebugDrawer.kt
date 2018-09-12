@@ -19,38 +19,92 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
 
+/**
+ * The main entry point when adding a debug drawer to your application. Typical usage looks
+ * something like:
+ *
+ * ```
+ * fun getRootViewContainerFor(activity: Activity): ViewGroup {
+ *   return DebugDrawer.with(activity)
+ *       .addSectionTitle("Logs")
+ *       .addModule(TimberModule())
+ *       .addModule(LeakCanaryModule())
+ *       .addSectionTitle("Device information")
+ *       .addModule(DeviceInfoModule())
+ *       .buildMainContainer()
+ * }
+ * ```
+ *
+ * The [ViewGroup] produced by [DebugDrawer.Builder.buildMainContainer] will be a child of a
+ * [DrawerLayout] that the activity can use to push and pop views as the user navigates through the
+ * app. Swiping from the "end" side of the screen will reveal the debug drawer, displaying all
+ * titles and modules that were added to the builder.
+ *
+ * Titles and modules are displayed in the order in which they're added to the builder. If you want
+ * to add custom modules to the drawer you can provide implementations of [DebugDrawerModule].
+ */
 object DebugDrawer {
 
+  /**
+   * Begin building a debug drawer for the specified activity.
+   */
   fun with(activity: Activity): Builder = Builder(activity)
 
+  /**
+   * Used to configure and build a debug drawer.
+   */
   class Builder internal constructor(private val activity: Activity) {
 
+    // TODO This should be initialised to null and only set to a FrameLayout in buildMainContainer if overrideMainContainer() has not been called.
     private var mainContainer: ViewGroup = FrameLayout(activity)
     private var index = 0
     private val sectionTitles = SparseArray<String>(5)
     private val modules = SparseArray<DebugDrawerModule>(5)
 
+    /**
+     * The default [ViewGroup] returned by [buildMainContainer] is a [FrameLayout], however this
+     * method can be used to override the container that will be returned by that method.
+     */
     fun overrideMainContainer(viewGroup: ViewGroup): Builder {
       mainContainer = viewGroup
       return this
     }
 
+    /**
+     * Add a heading that will be displayed above subsequently added modules. This is useful for
+     * creating a grouping of controls in the drawer.
+     */
     fun addSectionTitle(title: String): Builder {
       sectionTitles.put(index, title)
       index++
       return this
     }
 
+    /**
+     * A version of [addSectionTitle] that takes a string resource.
+     */
     fun addSectionTitle(@StringRes titleRes: Int): Builder {
       return addSectionTitle(activity.getString(titleRes))
     }
 
+    /**
+     * Add a [DebugDrawerModule] to the drawer, which may be one or many views.
+     */
     fun addModule(module: DebugDrawerModule): Builder {
       modules.put(index, module)
       index++
       return this
     }
 
+    /**
+     * Use all added titles and modules to produce a [DrawerLayout] that houses both the debug
+     * drawer and a container container. This `DrawerLayout` is added to the specified [Activity]
+     * then this method returns the container the `Activity` can use to push and pop different
+     * screens.
+     *
+     * This means that the calling `Activity` should not use the traditional
+     * [Activity.setContentView], but rather should use the [ViewGroup] returned by this method.
+     */
     fun buildMainContainer(): ViewGroup {
       // Create DrawerLayout and add mainContainer as its first child.
       val drawerLayout = DrawerLayout(activity)
@@ -106,6 +160,10 @@ object DebugDrawer {
     }
   }
 
+  /**
+   * Keep track of window insets and apply some additional padding to the drawer if it's being
+   * rendered behind the status bar.
+   */
   private class InsetListener(
       private val scrollView: DrawerScrollView,
       private val drawerContentContainer: View) : OnApplyWindowInsetsListener {
@@ -127,6 +185,10 @@ object DebugDrawer {
     }
   }
 
+  /**
+   * Listen for `onActivityStarted()` and `onActivityStopped()` callbacks and use them to invoke
+   * `onAttach()` and `onDetached()` on all modules in the drawer.
+   */
   private class LifecycleListener(
       private val modules: Set<DebugDrawerModule>) : ActivityLifecycleCallbacks {
 

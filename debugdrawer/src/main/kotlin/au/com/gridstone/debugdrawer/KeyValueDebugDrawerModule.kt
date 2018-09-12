@@ -9,6 +9,10 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.GridLayout
 import android.widget.TextView
 
+/**
+ * This simplifies the process of creating a module that only displays key-value pairs. Override
+ * [getEntries] and this class will take care of the rest.
+ */
 abstract class KeyValueDebugDrawerModule : DebugDrawerModule {
   final override fun onCreateView(parent: ViewGroup): View {
     val layout = GridLayout(parent.context)
@@ -30,5 +34,8 @@ abstract class KeyValueDebugDrawerModule : DebugDrawerModule {
     return layout
   }
 
+  /**
+   * Return a map of keys to values that will be displayed in the drawer.
+   */
   abstract fun getEntries(context: Context): Map<String, String>
 }

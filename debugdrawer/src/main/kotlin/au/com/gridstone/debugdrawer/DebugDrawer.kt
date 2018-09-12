@@ -51,7 +51,7 @@ object DebugDrawer {
       return this
     }
 
-    fun finishAndGetMainContainer(): ViewGroup {
+    fun buildMainContainer(): ViewGroup {
       // Create DrawerLayout and add mainContainer as its first child.
       val drawerLayout = DrawerLayout(activity)
       drawerLayout.id = R.id.debugDrawerId

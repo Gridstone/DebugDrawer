@@ -9,5 +9,5 @@ fun getRootViewContainerFor(activity: Activity): ViewGroup {
   return DebugDrawer.with(activity)
       .addSectionTitle("Device information")
       .addModule(DeviceInfoModule())
-      .finishAndGetMainContainer()
+      .buildMainContainer()
 }

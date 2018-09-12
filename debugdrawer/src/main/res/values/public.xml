@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- Hide all resources. -->
-  <public />
+
+  <public name="Theme.DebugDrawer" type="style"/>
+  <public name="Theme.DebugDrawer.Dialog" type="style"/>
+  <public name="Widget.DebugDrawer.RowWidget" type="style"/>
+  <public name="Widget.DebugDrawer.RowTitle" type="style"/>
+  <public name="Widget.DebugDrawer.RowValue" type="style"/>
+  <public name="Widget.DebugDrawer.Spinner" type="style"/>
+
 </resources>

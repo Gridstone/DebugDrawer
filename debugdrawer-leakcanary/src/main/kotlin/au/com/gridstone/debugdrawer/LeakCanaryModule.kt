@@ -6,6 +6,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import com.squareup.leakcanary.internal.DisplayLeakActivity
 
+/**
+ * Displays a button in the drawer to open LeakCanary's leak list activity. Note that including this
+ * module in your project removes the LeakCanary launcher icon, effectively making the debug
+ * drawer the main entry point into your leak list.
+ */
 class LeakCanaryModule : DebugDrawerModule {
 
   override fun onCreateView(parent: ViewGroup): View {

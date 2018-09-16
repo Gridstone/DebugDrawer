@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
     val viewModel: GamesViewModel = ViewModelProviders.of(this).get(GamesViewModel::class.java)
 
+    // Observe ViewModel state and change UI accordingly.
     viewModel.states.observe(this, Observer { state ->
       when (state) {
         State.Idle, State.Loading -> viewAnimator.displayedChild = 0

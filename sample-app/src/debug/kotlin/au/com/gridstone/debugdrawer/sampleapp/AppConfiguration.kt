@@ -17,6 +17,9 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit
 import retrofit2.mock.NetworkBehavior
 
+/**
+ * Debug configuration for the sample app.
+ */
 object AppConfiguration {
 
   private lateinit var app: Application

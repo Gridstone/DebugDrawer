@@ -6,10 +6,23 @@ import android.content.SharedPreferences
 import com.jakewharton.processphoenix.ProcessPhoenix
 import okhttp3.ResponseBody
 import retrofit2.Response
+import retrofit2.Retrofit
 import retrofit2.mock.NetworkBehavior
 import java.util.concurrent.Callable
 import java.util.concurrent.TimeUnit.MILLISECONDS
 
+/**
+ * Houses and persists configuration information for debug settings with [Retrofit].
+ *
+ * An instance of this object must be passed to [RetrofitModule], which will display configuration
+ * options within the debug drawer.
+ *
+ * The list of [Endpoint]s provided will be shown as selectable options, useful for swapping between
+ * between different environments such as development and staging. If a mock endpoint is currently
+ * selected then other controls in the drawer will be enabled to configure the [NetworkBehavior].
+ *
+ * When a new endpoint is selected the entire app process is relaunched via [ProcessPhoenix].
+ */
 class DebugRetrofitConfig(context: Context,
                           internal val endpoints: List<Endpoint>,
                           private val networkBehavior: NetworkBehavior) {
@@ -87,6 +100,9 @@ class DebugRetrofitConfig(context: Context,
     }
   }
 
+  /**
+   * Queries the current selection of error rates/types and uses them to spawn mock errors.
+   */
   private class ErrorFactory(
       private val sharedPrefs: SharedPreferences) : Callable<Response<*>> {
 

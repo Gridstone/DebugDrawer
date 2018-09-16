@@ -4,7 +4,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Spinner
+import retrofit2.Retrofit
+import retrofit2.mock.NetworkBehavior
 
+/**
+ * Uses a [DebugRetrofitConfig] to display controls to modify the behaviour of
+ * [Retrofit]/[NetworkBehavior].
+ *
+ * - **Endpoint:** Allows the URL that `Retrofit` uses  to be changed. In addition, if the selected
+ *   [Endpoint] is listed as a mock endpoint then the other controls in this module will be enabled.
+ *
+ * - **Delay:** How long a mock request should take.
+ *
+ * - **Variance:** How much variance in time there should be for mock requests.
+ *
+ * - **Fail rate:** The percentage of requests that should fail. Failures represent problems with a
+ *   network transaction, distinct from errors received from a server.
+ *
+ * - **Error rate:** The percentage of requests that should return an error.
+ *
+ * - **Error code:** The error code that is returned for requests that return mock errors.
+ */
 class RetrofitModule(private val config: DebugRetrofitConfig) : DebugDrawerModule {
 
   override fun onCreateView(parent: ViewGroup): View {

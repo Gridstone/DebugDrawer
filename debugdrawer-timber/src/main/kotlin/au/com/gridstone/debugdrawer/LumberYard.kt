@@ -15,6 +15,13 @@ import java.util.Calendar
 import java.util.Deque
 import java.util.Locale
 
+/**
+ * Keep track of [Timber] logs that can be displayed by [TimberModule]. In order for logs to be
+ * collected [LumberYard.install] must be called inside of [Application.onCreate].
+ *
+ * A no-op version of `LumberYard` is provided too, meaning you can keep the same
+ * `LumberYard.install()` call inside of `onCreate()` for release builds.
+ */
 object LumberYard {
 
   private const val BUFFER_SIZE = 200
@@ -25,6 +32,10 @@ object LumberYard {
   private lateinit var handler: Handler
   private var listener: ((Entry) -> Unit)? = null
 
+  /**
+   * Installs `LumberYard` for the app, planting a [DebugTree] that [TimberModule] can use to
+   * display logs from the debug drawer.
+   */
   fun install(app: Application) {
     this.app = app
     handler = Handler(app.mainLooper)
@@ -60,6 +71,7 @@ object LumberYard {
   }
 
   internal fun save(callback: (File?) -> Unit) {
+    // TODO Check if app is initialised and throw a detailed exception if it's not.
     SaveTask(callback).execute()
   }
 

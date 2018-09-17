@@ -21,7 +21,8 @@ import java.util.concurrent.TimeUnit.MILLISECONDS
  * between different environments such as development and staging. If a mock endpoint is currently
  * selected then other controls in the drawer will be enabled to configure the [NetworkBehavior].
  *
- * When a new endpoint is selected the entire app process is relaunched via [ProcessPhoenix].
+ * When a new endpoint is selected the entire app process is relaunched via [ProcessPhoenix]. If you
+ * need to invoke some code when this happens then make use of [doOnEndpointChange].
  */
 class DebugRetrofitConfig(context: Context,
                           internal val endpoints: List<Endpoint>,
@@ -31,6 +32,8 @@ class DebugRetrofitConfig(context: Context,
 
   private val sharedPrefs: SharedPreferences =
       appContext.getSharedPreferences("DebugDrawer_Retrofit", MODE_PRIVATE)
+
+  private var onEndpointChangeAction: ((old: Endpoint, new: Endpoint) -> Unit)? = null
 
   val currentEndpoint: Endpoint
 
@@ -90,11 +93,21 @@ class DebugRetrofitConfig(context: Context,
     }
 
   /**
+   * Define an action that should be invoked when a new [Endpoint] is selected. This is useful if
+   * you want to clear any local data when changing environments.
+   */
+  fun doOnEndpointChange(action: (old: Endpoint, new: Endpoint) -> Unit): DebugRetrofitConfig {
+    onEndpointChangeAction = action
+    return this
+  }
+
+  /**
    * Updates the current endpoint and relaunches the entire app. This is necessary as changing
    * backend environment usually involves invalidating almost all application state.
    */
   internal fun setEndpointAndRelaunch(endpoint: Endpoint) {
     if (endpoint != currentEndpoint) {
+      onEndpointChangeAction?.invoke(currentEndpoint, endpoint)
       sharedPrefs.putBlocking(KEY_ENDPOINT, endpoint.name)
       ProcessPhoenix.triggerRebirth(appContext)
     }

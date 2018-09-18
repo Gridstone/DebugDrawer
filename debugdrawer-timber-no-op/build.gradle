@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -20,4 +21,13 @@ android {
   dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
   }
+}
+
+publish {
+  userOrg = ORGANISATION
+  artifactId = 'debugdrawer-timber-no-op'
+  desc = 'A variant of the Timber debug drawer module that does nothing.'
+  website = PROJECT_URL
+  bintrayUser = System.getenv('BINTRAY_USER')
+  bintrayKey = System.getenv('BINTRAY_KEY')
 }

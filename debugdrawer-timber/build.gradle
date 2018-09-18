@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -23,4 +24,13 @@ android {
     implementation "com.jakewharton.timber:timber:${versions.timber}"
     implementation "androidx.core:core:${versions.androidx_core}"
   }
+}
+
+publish {
+  userOrg = ORGANISATION
+  artifactId = 'debugdrawer-timber'
+  desc = 'A debug drawer module that collects and displays Timber logs.'
+  website = PROJECT_URL
+  bintrayUser = System.getenv('BINTRAY_USER')
+  bintrayKey = System.getenv('BINTRAY_KEY')
 }

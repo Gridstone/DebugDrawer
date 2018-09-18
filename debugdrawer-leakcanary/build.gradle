@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -22,4 +23,13 @@ android {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
   }
+}
+
+publish {
+  userOrg = ORGANISATION
+  artifactId = 'debugdrawer-leakcanary'
+  desc = 'A debug drawer module that cages LeakCanary in the drawer.'
+  website = PROJECT_URL
+  bintrayUser = System.getenv('BINTRAY_USER')
+  bintrayKey = System.getenv('BINTRAY_KEY')
 }

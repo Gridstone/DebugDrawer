@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -21,4 +22,13 @@ android {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
     implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   }
+}
+
+publish {
+  userOrg = ORGANISATION
+  artifactId = 'debugdrawer'
+  desc = 'A configurable debug drawer for Android applications.'
+  website = PROJECT_URL
+  bintrayUser = System.getenv('BINTRAY_USER')
+  bintrayKey = System.getenv('BINTRAY_KEY')
 }

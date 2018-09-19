@@ -55,8 +55,7 @@ object DebugDrawer {
    */
   class Builder internal constructor(private val activity: Activity) {
 
-    // TODO This should be initialised to null and only set to a FrameLayout in buildMainContainer if overrideMainContainer() has not been called.
-    private var mainContainer: ViewGroup = FrameLayout(activity)
+    private var mainContainer: ViewGroup? = null
     private var index = 0
     private val sectionTitles = SparseArray<String>(5)
     private val modules = SparseArray<DebugDrawerModule>(5)
@@ -146,17 +145,19 @@ object DebugDrawer {
         drawerContent.addView(module.onCreateView(drawerContent))
       }
 
+      val container: ViewGroup = mainContainer ?: FrameLayout(activity)
+
       // If the main container is dealing with window insets then we want to know. It will
       // potentially allow us to render the debug drawer behind the status bar.
       val insetListener = InsetListener(drawerContentScrollView, drawerContent)
-      mainContainer.setOnApplyWindowInsetsListener(insetListener)
+      container.setOnApplyWindowInsetsListener(insetListener)
 
       // Add the DrawerLayout to the activity, register lifecycle callbacks to inform modules of
       // attach/detach events, and return the main container the activity can use to push and pop
       // screen views.
       activity.setContentView(drawerLayout)
       activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules.toSet()))
-      return mainContainer
+      return container
     }
   }
 

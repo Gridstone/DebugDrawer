@@ -57,12 +57,19 @@ object LumberYard {
   internal fun getEntries(): List<Entry> = entries.toList()
 
   internal fun setListener(listener: (Entry) -> Unit) {
+    assertInitialised()
     this.listener = listener
   }
 
   internal fun clearListener() {
+    assertInitialised()
     listener = null
     handler.removeCallbacksAndMessages(null)
+  }
+
+  internal fun save(callback: (File?) -> Unit) {
+    assertInitialised()
+    SaveTask(callback).execute()
   }
 
   @Synchronized private fun addEntry(entry: Entry) {
@@ -70,9 +77,10 @@ object LumberYard {
     if (entries.size > BUFFER_SIZE) entries.removeFirst()
   }
 
-  internal fun save(callback: (File?) -> Unit) {
-    // TODO Check if app is initialised and throw a detailed exception if it's not.
-    SaveTask(callback).execute()
+  private fun assertInitialised() {
+    if (!LumberYard::app.isInitialized) {
+      throw IllegalStateException("LumberYard.install() has not been called.")
+    }
   }
 
   private class SaveTask(private val callback: (File?) -> Unit) : AsyncTask<Unit, Unit, File?>() {

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -23,4 +24,13 @@ android {
     implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
     implementation "com.jakewharton:process-phoenix:${versions.process_phoenix}"
   }
+}
+
+publish {
+  userOrg = ORGANISATION
+  artifactId = 'debugdrawer-retrofit'
+  desc = 'A debug drawer module that allows for configuration of Retrofit.'
+  website = PROJECT_URL
+  bintrayUser = System.getenv('BINTRAY_USER')
+  bintrayKey = System.getenv('BINTRAY_KEY')
 }

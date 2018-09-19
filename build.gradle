@@ -5,6 +5,7 @@ buildscript {
       'min_sdk'               : 21,
       'android_gradle_plugin' : '3.2.0-rc03',
       'kotlin'                : '1.2.61',
+      'bintray_release'       : '1.0.0',
       'coroutines'            : '0.25.0',
       'androidx_core'         : '1.0.0-rc02',
       'drawerlayout'          : '1.0.0-rc02',
@@ -28,6 +29,7 @@ buildscript {
   dependencies {
     classpath "com.android.tools.build:gradle:${versions.android_gradle_plugin}"
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+    classpath "guru.stefma.bintrayrelease:bintrayrelease:${versions.bintray_release}"
   }
 }
 
@@ -36,6 +38,9 @@ allprojects {
     google()
     jcenter()
   }
+
+  group = GROUP
+  version = VERSION_NAME
 }
 
 task clean(type: Delete) {

@@ -12,7 +12,7 @@ script:
   - ./gradlew build --stacktrace
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = "mater" ]; then ./gradlew bintrayUpload; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./gradlew bintrayUpload; fi
 
 notifications:
   email: false

@@ -1,10 +1,10 @@
 DebugDrawer
 ===========
 
+<img src="art/video_sample.gif" title="Animated example." align="right"/>
+
 A configurable debug drawer to use in your Android app. Inspired by
 [u2020](https://github.com/JakeWharton/u2020).
-
-TODO. Add a gif here of the drawer in action.
 
 The debug drawer is something you can add to your debug builds to make your life easier as a
 developer or tester. It provides a convenient way of exposing development specific controls without
@@ -16,6 +16,8 @@ To give you some inspiration, this repository provides out of the box modules fo
  - Displaying device information
  - Viewing and sharing Logcat entries collected by [Timber](https://github.com/JakeWharton/timber)
  - Providing a more convenient entry into [LeakCanary](https://github.com/square/leakcanary)
+ 
+Of course, you're free to implement your own modules as well.
  
 Usage
 -----
@@ -74,15 +76,18 @@ library written in Kotlin makes it more enjoyable to work on 😄.
 Sample apps
 -----------
 
+<img src="art/screenshot_sample.png" title="Example screenshot." width="225" height="400" align="right"/>
+
 This repository provides two sample apps that demonstrate usage of the debug drawer. The
 `simple-sample-app` has no other dependencies and is about as bare-bones as you can get. The
 `sample-app` is a bit more complex. It interfaces with the
 [Giant Bomb API](https://www.giantbomb.com/api/) to retrieve and display a list of video games, and
 aims to be closer to a real application.
 
-| Sample app                                            | Open debug drawer                                      |
-| ----------------------------------------------------- | ------------------------------------------------------ |
-| ![Sample app screenshot.](art/screenshot_sample1.png) | ![Open drawer screenshot.](art/screenshot_sample2.png) |
+Browsing through the implementation of `sample-app` should provide you with an idea of how you could
+add the debug drawer to your app. You might want to use dependency injection to assist in setting it
+up, or you could follow the example and try and roll something by hand. Whatever your choice, it
+doesn't need to be particularly complex.
 
 Provided modules
 ----------------

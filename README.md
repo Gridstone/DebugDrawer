@@ -158,7 +158,18 @@ looking at an example, so check out `sample-app` to see it in action.
 Download
 --------
 
-Artifacts will be available on Maven Central soon.
+All artifacts are up on jcenter.
+
+For the main library
+```au.com.gridstone.debugdrawer:debugdrawer:0.9.0```
+For the LeakCanary module
+```au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.0```
+For the Retrofit module
+```au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.0```
+For the Timber module
+```au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.0```
+For the no-op Timber module
+```au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.0```
 
 Licence
 -------

@@ -26,6 +26,8 @@ android {
 
 publish {
   userOrg = ORGANISATION
+  repoName = REPO_NAME
+  uploadName = UPLOAD_NAME
   artifactId = 'debugdrawer'
   desc = 'A configurable debug drawer for Android applications.'
   website = PROJECT_URL

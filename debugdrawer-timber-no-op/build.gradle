@@ -25,6 +25,8 @@ android {
 
 publish {
   userOrg = ORGANISATION
+  repoName = REPO_NAME
+  uploadName = UPLOAD_NAME
   artifactId = 'debugdrawer-timber-no-op'
   desc = 'A variant of the Timber debug drawer module that does nothing.'
   website = PROJECT_URL

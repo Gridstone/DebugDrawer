@@ -27,6 +27,8 @@ android {
 
 publish {
   userOrg = ORGANISATION
+  repoName = REPO_NAME
+  uploadName = UPLOAD_NAME
   artifactId = 'debugdrawer-leakcanary'
   desc = 'A debug drawer module that cages LeakCanary in the drawer.'
   website = PROJECT_URL

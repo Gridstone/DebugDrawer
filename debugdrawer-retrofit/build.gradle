@@ -28,6 +28,8 @@ android {
 
 publish {
   userOrg = ORGANISATION
+  repoName = REPO_NAME
+  uploadName = UPLOAD_NAME
   artifactId = 'debugdrawer-retrofit'
   desc = 'A debug drawer module that allows for configuration of Retrofit.'
   website = PROJECT_URL

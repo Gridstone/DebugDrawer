@@ -161,15 +161,36 @@ Download
 All artifacts are up on jcenter.
 
 For the main library
-```au.com.gridstone.debugdrawer:debugdrawer:0.9.0```
+```
+au.com.gridstone.debugdrawer:debugdrawer:0.9.0
+```
 For the LeakCanary module
-```au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.0```
+```
+au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.0
+```
 For the Retrofit module
-```au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.0```
+```
+au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.0
+```
 For the Timber module
-```au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.0```
+```
+au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.0
+```
 For the no-op Timber module
-```au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.0```
+```
+au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.0
+```
+
+Contributing
+------------
+
+Pull requests are welcome, but we do want to keep this codebase fairly lean. Consider how much
+utility a new drawer module would provide to all Android developers. If it's usage is niche then it
+might be better maintained as a separate project. Feel free to open issues to discuss new module
+ideas.
+
+When submitting code, please adhere to Gridstone's
+[Kotlin style guide](https://github.com/Gridstone/KotlinStyleGuide).
 
 Licence
 -------

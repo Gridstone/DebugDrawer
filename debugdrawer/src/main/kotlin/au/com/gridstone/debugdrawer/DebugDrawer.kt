@@ -108,7 +108,8 @@ object DebugDrawer {
       // Create DrawerLayout and add mainContainer as its first child.
       val drawerLayout = DrawerLayout(activity)
       drawerLayout.id = R.id.debugDrawerId
-      drawerLayout.addView(mainContainer)
+      val container: ViewGroup = mainContainer ?: FrameLayout(activity)
+      drawerLayout.addView(container)
 
       val themedContext = ContextThemeWrapper(activity, R.style.Theme_DebugDrawer)
       val inflater = LayoutInflater.from(themedContext)
@@ -144,8 +145,6 @@ object DebugDrawer {
             "Index has no associated title or module.")
         drawerContent.addView(module.onCreateView(drawerContent))
       }
-
-      val container: ViewGroup = mainContainer ?: FrameLayout(activity)
 
       // If the main container is dealing with window insets then we want to know. It will
       // potentially allow us to render the debug drawer behind the status bar.

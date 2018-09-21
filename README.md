@@ -16,6 +16,7 @@ To give you some inspiration, this repository provides out of the box modules fo
  - Displaying device information
  - Viewing and sharing Logcat entries collected by [Timber](https://github.com/JakeWharton/timber)
  - Providing a more convenient entry into [LeakCanary](https://github.com/square/leakcanary)
+ - Selecting a logging level and piping OkHttp logs into Timber
  
 Of course, you're free to implement your own modules as well.
  
@@ -123,6 +124,17 @@ inside of your `Application` class. Because it would be annoying to define two s
 provided. This allows you to keep the `LumberYard.install(this)` call in your `Application` for
 release builds.
 
+### OkHttp logger
+
+It can be incredibly useful to view HTTP requests and results when debugging your app. This module
+provides a dropdown menu in the drawer to select what level of logging you'd like to see for your
+HTTP requests. It relies on you using OkHttp as your HTTP client, and pipes its output into Timber.
+
+To use it, first add
+[HttpLogger.interceptor](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/HttpLogger.kt)
+as an interceptor to your `OkHttpClient`. Then pass `HttpLogger` on to
+[OkHttpLoggerModule](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/OkHttpLoggerModule.kt).
+
 ### Device info
 
 Nothing too fancy, this module displays
@@ -179,6 +191,10 @@ au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.1
 For the no-op Timber module
 ```
 au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.1
+```
+For the OkHttp logger
+```
+au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.1
 ```
 
 Contributing

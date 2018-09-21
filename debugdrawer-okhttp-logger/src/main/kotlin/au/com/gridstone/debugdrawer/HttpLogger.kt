@@ -1,0 +1,43 @@
+package au.com.gridstone.debugdrawer
+
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.logging.HttpLoggingInterceptor.Level
+import timber.log.Timber
+
+/**
+ * A wrapper around an OkHttp logging interceptor that pipes logs out to [Timber]. The log level is
+ * dictated by [OkHttpLoggerModule] in the debug drawer.
+ *
+ * You must add [interceptor] to your client via [OkHttpClient.Builder.addInterceptor] in order for
+ * logs to be intercepted and delivered to Timber.
+ */
+class HttpLogger(context: Context) {
+
+  private val logInterceptor = HttpLoggingInterceptor { message -> Timber.tag("HTTP").v(message) }
+  private val sharedPrefs: SharedPreferences = context
+      .getSharedPreferences("DebugDrawer_HttpLogger", MODE_PRIVATE)
+
+  /**
+   * An interceptor that pipes HTTP
+   */
+  val interceptor: Interceptor = logInterceptor
+
+  init {
+    val storedLevel = sharedPrefs.getInt(KEY_LOG_LEVEL, 0)
+    logInterceptor.level = Level.values()[storedLevel]
+  }
+
+  internal fun getStoredLevelPosition(): Int = sharedPrefs.getInt(KEY_LOG_LEVEL, 0)
+
+  internal fun setLevel(position: Int) {
+    sharedPrefs.edit().putInt(KEY_LOG_LEVEL, position).apply()
+    logInterceptor.level = Level.values()[position]
+  }
+}
+
+private const val KEY_LOG_LEVEL = "logLevel"

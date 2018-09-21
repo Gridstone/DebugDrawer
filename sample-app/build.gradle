@@ -32,6 +32,7 @@ dependencies {
   debugImplementation project(':debugdrawer')
   debugImplementation project(':debugdrawer-leakcanary')
   debugImplementation project(':debugdrawer-retrofit')
+  debugImplementation project(':debugdrawer-okhttp-logger')
   debugImplementation project(':debugdrawer-timber')
   releaseImplementation project(':debugdrawer-timber-no-op')
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"

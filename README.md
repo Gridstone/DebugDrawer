@@ -162,23 +162,23 @@ All artifacts are up on jcenter.
 
 For the main library
 ```
-au.com.gridstone.debugdrawer:debugdrawer:0.9.0
+au.com.gridstone.debugdrawer:debugdrawer:0.9.1
 ```
 For the LeakCanary module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.0
+au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.1
 ```
 For the Retrofit module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.0
+au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.1
 ```
 For the Timber module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.0
+au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.1
 ```
 For the no-op Timber module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.0
+au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.1
 ```
 
 Contributing

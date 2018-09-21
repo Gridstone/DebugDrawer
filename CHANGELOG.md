@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.9.1
+-------------
+
+- Fix drawer not building correctly when no custom container provided in builder.
+
 Version 0.9.0
 -------------
 

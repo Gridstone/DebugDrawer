@@ -7,7 +7,9 @@ import au.com.gridstone.debugdrawer.DebugDrawer
 import au.com.gridstone.debugdrawer.DebugRetrofitConfig
 import au.com.gridstone.debugdrawer.DeviceInfoModule
 import au.com.gridstone.debugdrawer.Endpoint
+import au.com.gridstone.debugdrawer.HttpLogger
 import au.com.gridstone.debugdrawer.LeakCanaryModule
+import au.com.gridstone.debugdrawer.OkHttpLoggerModule
 import au.com.gridstone.debugdrawer.RetrofitModule
 import au.com.gridstone.debugdrawer.TimberModule
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
@@ -30,6 +32,7 @@ object AppConfiguration {
   )
 
   private val networkBehavior = NetworkBehavior.create()
+  private val httpLogger by lazy { HttpLogger(app) }
   private val debugRetrofitConfig by lazy { DebugRetrofitConfig(app, endpoints, networkBehavior) }
 
   val api: GamesApi by lazy { createApi() }
@@ -40,9 +43,13 @@ object AppConfiguration {
 
   private fun createApi(): GamesApi {
     val currentEndpoint: Endpoint = debugRetrofitConfig.currentEndpoint
+    val httpClient = HttpConfiguration.client.newBuilder()
+        .addInterceptor(httpLogger.interceptor)
+        .build()
+
     val retrofit = Retrofit.Builder()
         .baseUrl(currentEndpoint.url)
-        .client(HttpConfiguration.client)
+        .client(httpClient)
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
@@ -60,6 +67,7 @@ object AppConfiguration {
         .addSectionTitle("Network")
         .addModule(RetrofitModule(debugRetrofitConfig))
         .addSectionTitle("Logs")
+        .addModule(OkHttpLoggerModule(httpLogger))
         .addModule(TimberModule())
         .addModule(LeakCanaryModule())
         .addSectionTitle("Device information")

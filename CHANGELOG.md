@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.9.3
+-------------
+
+- Fix bug where Timber logs were not sharing
+- Fix Timber log FileProvider [potentially clashing](https://commonsware.com/blog/2017/06/27/fileprovider-libraries.html) with consuming application
+
 Version 0.9.2
 -------------
 

@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.9.2
+-------------
+
+- Add OkHttp log interceptor module
+- Bump various dependencies, including AndroidX to the new stable release
+
 Version 0.9.1
 -------------
 

@@ -8,8 +8,8 @@
   <application>
 
     <provider
-        android:name="androidx.core.content.FileProvider"
-        android:authorities="au.com.gridstone.debugdrawer.fileprovider"
+        android:name="au.com.gridstone.debugdrawer.DebugDrawerTimberFileProvider"
+        android:authorities="${applicationId}.au.com.gridstone.debugdrawer.fileprovider"
         android:exported="false"
         android:grantUriPermissions="true"
         >

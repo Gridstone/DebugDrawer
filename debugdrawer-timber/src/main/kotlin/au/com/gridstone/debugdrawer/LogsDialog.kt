@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.DialogInterface.OnClickListener
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import android.content.Intent.EXTRA_STREAM
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.ResolveInfo
 import android.content.res.Resources
@@ -73,14 +74,15 @@ internal class LogsDialog(context: Context) : AlertDialog(context) {
       // We couldn't produce a logs file for some reason. Give up.
       if (file == null) return@save
 
-      val uri: Uri = FileProvider.getUriForFile(context,
-                                                "au.com.gridstone.debugdrawer.fileprovider",
-                                                file)
+      val uri: Uri = FileProvider.getUriForFile(
+          context,
+          "${context.packageName}.au.com.gridstone.debugdrawer.fileprovider",
+          file)
 
       val sendIntent = Intent(ACTION_SEND)
       sendIntent.type = "text/plain"
-      sendIntent.data = uri
-      sendIntent.flags = sendIntent.flags or FLAG_GRANT_READ_URI_PERMISSION
+      sendIntent.putExtra(EXTRA_STREAM, uri)
+      sendIntent.addFlags(FLAG_GRANT_READ_URI_PERMISSION)
 
       val handlers: List<ResolveInfo> = context.packageManager.queryIntentActivities(sendIntent, 0)
       // Give up if our send intent cannot be handled.

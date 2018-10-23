@@ -3,7 +3,7 @@ buildscript {
   ext.versions = [
       'compile_sdk'           : 28,
       'min_sdk'               : 21,
-      'android_gradle_plugin' : '3.2.0',
+      'android_gradle_plugin' : '3.2.1',
       'kotlin'                : '1.2.71',
       'bintray_release'       : '1.0.0',
       'coroutines'            : '0.30.0',
@@ -11,7 +11,7 @@ buildscript {
       'drawerlayout'          : '1.0.0',
       'material'              : '1.0.0',
       'lifecycle'             : '2.0.0',
-      'leakcanary'            : '1.5.4',
+      'leakcanary'            : '1.6.2',
       'moshi'                 : '1.6.0',
       'okhttp'                : '3.11.0',
       'retrofit'              : '2.4.0',

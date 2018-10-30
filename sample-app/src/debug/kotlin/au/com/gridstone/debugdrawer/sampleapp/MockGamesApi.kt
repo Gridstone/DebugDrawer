@@ -1,6 +1,6 @@
 package au.com.gridstone.debugdrawer.sampleapp
 
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 

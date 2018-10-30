@@ -13,7 +13,7 @@ import au.com.gridstone.debugdrawer.OkHttpLoggerModule
 import au.com.gridstone.debugdrawer.RetrofitModule
 import au.com.gridstone.debugdrawer.TimberModule
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.mock.MockRetrofit

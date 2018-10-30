@@ -118,7 +118,7 @@ object DebugDrawer {
       val drawerContentScrollView = DrawerScrollView(themedContext)
       val params = DrawerLayout.LayoutParams(drawerLayout.dpToPx(290), MATCH_PARENT, END)
       drawerContentScrollView.layoutParams = params
-      drawerContentScrollView.id = R.id.debugDrawerId
+      drawerContentScrollView.id = R.id.debugDrawerScrollId
       drawerContentScrollView.setBackgroundColor(Color.rgb(66, 66, 66))
       drawerLayout.addView(drawerContentScrollView)
 

@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 0.9.4
+-------------
+
+- Fix crash on older versions of Android (at least on API 21 and 22)
+- Fix state restoration of drawer and scroll view
+- Bump various dependencies
+
 Version 0.9.3
 -------------
 

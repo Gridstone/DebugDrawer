@@ -35,6 +35,7 @@ dependencies {
   debugImplementation project(':debugdrawer-okhttp-logger')
   debugImplementation project(':debugdrawer-timber')
   releaseImplementation project(':debugdrawer-timber-no-op')
+  implementation "androidx.appcompat:appcompat:${versions.appcompat}"
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"

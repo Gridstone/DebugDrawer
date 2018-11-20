@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.9.5
+-------------
+
+- Add pretty printing JSON option in HTTP logger module
+
 Version 0.9.4
 -------------
 

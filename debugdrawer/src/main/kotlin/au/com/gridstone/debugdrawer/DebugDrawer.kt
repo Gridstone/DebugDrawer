@@ -146,8 +146,8 @@ object DebugDrawer {
         drawerContent.addView(module.onCreateView(drawerContent))
       }
 
-      // If the main container is dealing with window insets then we want to know. It will
-      // potentially allow us to render the debug drawer behind the status bar.
+      // If the main container is dealing with window insets then we want to know. It will allow
+      // us to update the drawer's padding accordingly.
       val insetListener = InsetListener(drawerContentScrollView, drawerContent)
       container.setOnApplyWindowInsetsListener(insetListener)
 
@@ -162,7 +162,7 @@ object DebugDrawer {
 
   /**
    * Keep track of window insets and apply some additional padding to the drawer if it's being
-   * rendered behind the status bar.
+   * rendered behind window insets.
    */
   private class InsetListener(
       private val scrollView: DrawerScrollView,
@@ -176,10 +176,10 @@ object DebugDrawer {
       val verticalPadding: Int = resources.getDimensionPixelSize(R.dimen.drawerVerticalPadding)
 
       drawerContentContainer.setPadding(
-          horizontalPadding,
+          horizontalPadding + insets.systemWindowInsetLeft,
           verticalPadding + insets.systemWindowInsetTop,
-          horizontalPadding,
-          verticalPadding)
+          horizontalPadding + insets.systemWindowInsetRight,
+          verticalPadding + insets.systemWindowInsetBottom)
 
       return insets
     }

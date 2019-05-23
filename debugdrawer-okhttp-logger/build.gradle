@@ -34,6 +34,6 @@ publish {
   artifactId = 'debugdrawer-okhttp-logger'
   desc = 'A debug drawer module that configures Timber logging of OkHttp requests.'
   website = PROJECT_URL
-  bintrayUser = System.getenv('BINTRAY_USER')
-  bintrayKey = System.getenv('BINTRAY_KEY')
+  bintrayUser = System.getenv('BINTRAY_USER') ?: ''
+  bintrayKey = System.getenv('BINTRAY_KEY') ?: ''
 }

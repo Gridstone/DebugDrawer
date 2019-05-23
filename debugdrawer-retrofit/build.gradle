@@ -33,6 +33,6 @@ publish {
   artifactId = 'debugdrawer-retrofit'
   desc = 'A debug drawer module that allows for configuration of Retrofit.'
   website = PROJECT_URL
-  bintrayUser = System.getenv('BINTRAY_USER')
-  bintrayKey = System.getenv('BINTRAY_KEY')
+  bintrayUser = System.getenv('BINTRAY_USER') ?: ''
+  bintrayKey = System.getenv('BINTRAY_KEY') ?: ''
 }

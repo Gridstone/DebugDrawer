@@ -31,6 +31,6 @@ publish {
   artifactId = 'debugdrawer'
   desc = 'A configurable debug drawer for Android applications.'
   website = PROJECT_URL
-  bintrayUser = System.getenv('BINTRAY_USER')
-  bintrayKey = System.getenv('BINTRAY_KEY')
+  bintrayUser = System.getenv('BINTRAY_USER') ?: ''
+  bintrayKey = System.getenv('BINTRAY_KEY') ?: ''
 }

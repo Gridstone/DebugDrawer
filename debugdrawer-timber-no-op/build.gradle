@@ -30,6 +30,6 @@ publish {
   artifactId = 'debugdrawer-timber-no-op'
   desc = 'A variant of the Timber debug drawer module that does nothing.'
   website = PROJECT_URL
-  bintrayUser = System.getenv('BINTRAY_USER')
-  bintrayKey = System.getenv('BINTRAY_KEY')
+  bintrayUser = System.getenv('BINTRAY_USER') ?: ''
+  bintrayKey = System.getenv('BINTRAY_KEY') ?: ''
 }

@@ -19,7 +19,7 @@ object HttpConfiguration {
   private object AuthInterceptor : Interceptor {
 
     override fun intercept(chain: Chain): Response {
-      val url: HttpUrl = chain.request().url().newBuilder()
+      val url: HttpUrl = chain.request().url.newBuilder()
           .addQueryParameter("api_key", API_KEY)
           .build()
 

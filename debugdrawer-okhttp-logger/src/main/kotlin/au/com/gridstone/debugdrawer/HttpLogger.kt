@@ -7,6 +7,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
+import okhttp3.logging.HttpLoggingInterceptor.Logger
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -21,20 +22,22 @@ import timber.log.Timber
  */
 class HttpLogger(context: Context, prettyPrintJson: Boolean = true) {
 
-  private val logInterceptor = HttpLoggingInterceptor { message ->
-    val formattedMessage: String = try {
-      when {
-        !prettyPrintJson -> message
-        message.startsWith('{') -> JSONObject(message).toString(2)
-        message.startsWith('[') -> JSONArray(message).toString(2)
-        else -> message
+  private val logInterceptor = HttpLoggingInterceptor(object : Logger {
+    override fun log(message: String) {
+      val formattedMessage: String = try {
+        when {
+          !prettyPrintJson -> message
+          message.startsWith('{') -> JSONObject(message).toString(2)
+          message.startsWith('[') -> JSONArray(message).toString(2)
+          else -> message
+        }
+      } catch (e: JSONException) {
+        message
       }
-    } catch (e: JSONException) {
-      message
+
+      Timber.tag("HTTP").v(formattedMessage)
     }
-    
-    Timber.tag("HTTP").v(formattedMessage)
-  }
+  })
 
   private val sharedPrefs: SharedPreferences = context
       .getSharedPreferences("DebugDrawer_HttpLogger", MODE_PRIVATE)

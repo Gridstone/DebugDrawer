@@ -13,6 +13,7 @@ buildscript {
       'material'              : '1.0.0',
       'lifecycle'             : '2.0.0',
       'leakcanary'            : '1.6.3',
+      'leakcanary2'           : '2.0-alpha-3',
       'moshi'                 : '1.8.0',
       'okhttp'                : '4.0.0',
       'retrofit'              : '2.6.0',

@@ -16,13 +16,9 @@ import java.util.Deque
 import java.util.Locale
 
 /**
- * Keep track of [Timber] logs that can be displayed by [TimberModule]. In order for logs to be
- * collected [LumberYard.install] must be called inside of [Application.onCreate].
- *
- * A no-op version of `LumberYard` is provided too, meaning you can keep the same
- * `LumberYard.install()` call inside of `onCreate()` for release builds.
+ * Keep track of [Timber] logs that can be displayed by [TimberModule].
  */
-object LumberYard {
+internal object LumberYard {
 
   private const val BUFFER_SIZE = 200
 
@@ -54,20 +50,20 @@ object LumberYard {
     })
   }
 
-  internal fun getEntries(): List<Entry> = entries.toList()
+  fun getEntries(): List<Entry> = entries.toList()
 
-  internal fun setListener(listener: (Entry) -> Unit) {
+  fun setListener(listener: (Entry) -> Unit) {
     assertInitialised()
     this.listener = listener
   }
 
-  internal fun clearListener() {
+  fun clearListener() {
     assertInitialised()
     listener = null
     handler.removeCallbacksAndMessages(null)
   }
 
-  internal fun save(callback: (File?) -> Unit) {
+  fun save(callback: (File?) -> Unit) {
     assertInitialised()
     SaveTask(callback).execute()
   }

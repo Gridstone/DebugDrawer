@@ -21,6 +21,12 @@
 
     </provider>
 
+    <provider
+        android:name="au.com.gridstone.debugdrawer.LumberYardInstaller"
+        android:authorities="${applicationId}.lumberyard-installer"
+        android:exported="false"
+        />
+
   </application>
 
 </manifest>

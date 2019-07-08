@@ -1,7 +1,6 @@
 package au.com.gridstone.debugdrawer.sampleapp
 
 import android.app.Application
-import au.com.gridstone.debugdrawer.LumberYard
 import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 import timber.log.Timber.DebugTree
@@ -16,7 +15,6 @@ class SampleApp : Application() {
     if (BuildConfig.DEBUG) Timber.plant(DebugTree())
 
     LeakCanary.install(this)
-    LumberYard.install(this)
     AppConfiguration.init(this)
   }
 }

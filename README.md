@@ -113,17 +113,6 @@ Timber provides some nice utility on top of Android's standard `Log` class. This
 enhance it further by providing a mechanism to view logs from within your own app. In addition, it
 allows you to share the current collection of logs if you happen to see something interesting.
 
-To use this module you must call
-```kotlin
-override fun onCreate() {
-  LumberYard.install(this)
-}
-```
-inside of your `Application` class. Because it would be annoying to define two separate
-`Application` classes for both debug and release builds, a `debugdrawer-timber-no-op` dependency is
-provided. This allows you to keep the `LumberYard.install(this)` call in your `Application` for
-release builds.
-
 ### OkHttp logger
 
 It can be incredibly useful to view HTTP requests and results when debugging your app. This module
@@ -187,10 +176,6 @@ au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.4
 For the Timber module
 ```
 au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.4
-```
-For the no-op Timber module
-```
-au.com.gridstone.debugdrawer:debugdrawer-timber-no-op:0.9.4
 ```
 For the OkHttp logger
 ```

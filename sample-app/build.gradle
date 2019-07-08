@@ -30,7 +30,7 @@ dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
   debugImplementation project(':debugdrawer')
-  debugImplementation project(':debugdrawer-leakcanary')
+  debugImplementation project(':debugdrawer-leakcanary2')
   debugImplementation project(':debugdrawer-retrofit')
   debugImplementation project(':debugdrawer-okhttp-logger')
   debugImplementation project(':debugdrawer-timber')
@@ -40,8 +40,7 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
   implementation "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
   implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-  debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
-  releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
+  debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary2}"
   implementation "com.squareup.moshi:moshi:${versions.moshi}"
   implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
   implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"

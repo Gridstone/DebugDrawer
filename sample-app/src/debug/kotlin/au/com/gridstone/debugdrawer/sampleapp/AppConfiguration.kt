@@ -8,10 +8,10 @@ import au.com.gridstone.debugdrawer.DebugRetrofitConfig
 import au.com.gridstone.debugdrawer.DeviceInfoModule
 import au.com.gridstone.debugdrawer.Endpoint
 import au.com.gridstone.debugdrawer.HttpLogger
-import au.com.gridstone.debugdrawer.LeakCanaryModule
 import au.com.gridstone.debugdrawer.OkHttpLoggerModule
 import au.com.gridstone.debugdrawer.RetrofitModule
 import au.com.gridstone.debugdrawer.TimberModule
+import au.com.gridstone.debugdrawer.leakcanary.LeakCanaryModule
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -69,7 +69,7 @@ object AppConfiguration {
         .addSectionTitle("Logs")
         .addModule(OkHttpLoggerModule(httpLogger))
         .addModule(TimberModule())
-        .addModule(LeakCanaryModule())
+        .addModule(LeakCanaryModule)
         .addSectionTitle("Device information")
         .addModule(DeviceInfoModule())
         .buildMainContainer()

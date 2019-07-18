@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.timber
 
 import android.app.Dialog
 import android.content.Context
@@ -6,6 +6,7 @@ import android.view.ContextThemeWrapper
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import au.com.gridstone.debugdrawer.DebugDrawerModule
 import timber.log.Timber
 
 /**

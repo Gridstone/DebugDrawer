@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.retrofit
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 
-internal class NetworkVarianceAdapter(context: Context) : BindableAdapter<Int>(context) {
+internal class NetworkPercentageAdapter(context: Context) : BindableAdapter<Int>(context) {
 
-  private val values = intArrayOf(20, 40, 60)
+  private val values = intArrayOf(0, 1, 3, 10, 25, 50, 75, 100)
 
   fun getPositionForValue(value: Int): Int {
     val position = values.indexOf(value)
     if (position >= 0) return position
-    return 1 // Default to 40% if something changes.
+    return 0 // Default to 0% if something changes.
   }
 
   override fun getCount(): Int = values.size
@@ -26,8 +26,13 @@ internal class NetworkVarianceAdapter(context: Context) : BindableAdapter<Int>(c
       inflater.inflate(android.R.layout.simple_spinner_item, container, false)
 
   override fun bindView(item: Int, position: Int, view: View) {
-    val textView = view.findViewById<TextView>(android.R.id.text1)
-    textView.text = view.context.getString(R.string.drawer_retrofitVarianceEntry, item)
+    val textView: TextView = view.findViewById(android.R.id.text1)
+
+    if (position == 0) {
+      textView.text = view.context.getString(R.string.drawer_retrofitPercentageNone)
+    } else {
+      textView.text = view.context.getString(R.string.drawer_retrofitPercentageEntry, item)
+    }
   }
 
   override fun newDropDownView(inflater: LayoutInflater, position: Int,

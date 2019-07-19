@@ -2,13 +2,13 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="au.com.gridstone.debugdrawer"
+    package="au.com.gridstone.debugdrawer.timber"
     >
 
   <application>
 
     <provider
-        android:name="au.com.gridstone.debugdrawer.DebugDrawerTimberFileProvider"
+        android:name=".DebugDrawerTimberFileProvider"
         android:authorities="${applicationId}.au.com.gridstone.debugdrawer.fileprovider"
         android:exported="false"
         android:grantUriPermissions="true"
@@ -22,7 +22,7 @@
     </provider>
 
     <provider
-        android:name="au.com.gridstone.debugdrawer.LumberYardInstaller"
+        android:name=".LumberYardInstaller"
         android:authorities="${applicationId}.lumberyard-installer"
         android:exported="false"
         />

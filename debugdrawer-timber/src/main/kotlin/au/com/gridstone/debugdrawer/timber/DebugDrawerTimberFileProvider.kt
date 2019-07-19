@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.timber
 
 import androidx.core.content.FileProvider
 

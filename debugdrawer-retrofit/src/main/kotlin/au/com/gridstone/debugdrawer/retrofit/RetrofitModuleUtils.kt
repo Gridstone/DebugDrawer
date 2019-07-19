@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.retrofit
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences

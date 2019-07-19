@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.okhttplogs
 
 import android.view.LayoutInflater
 import android.view.View

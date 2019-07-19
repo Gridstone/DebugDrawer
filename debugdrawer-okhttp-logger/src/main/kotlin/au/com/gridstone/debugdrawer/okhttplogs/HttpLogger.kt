@@ -1,4 +1,4 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.okhttplogs
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

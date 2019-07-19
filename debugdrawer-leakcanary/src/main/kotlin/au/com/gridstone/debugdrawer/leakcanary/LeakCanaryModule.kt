@@ -1,9 +1,10 @@
-package au.com.gridstone.debugdrawer
+package au.com.gridstone.debugdrawer.leakcanary
 
 import android.content.Intent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import au.com.gridstone.debugdrawer.DebugDrawerModule
 import com.squareup.leakcanary.internal.DisplayLeakActivity
 
 /**

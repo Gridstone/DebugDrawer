@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'guru.stefma.bintrayrelease'
 
 android {
   compileSdkVersion versions.compile_sdk
@@ -24,13 +23,4 @@ android {
   }
 }
 
-publish {
-  userOrg = ORGANISATION
-  repoName = REPO_NAME
-  uploadName = UPLOAD_NAME
-  artifactId = 'debugdrawer'
-  desc = 'A configurable debug drawer for Android applications.'
-  website = PROJECT_URL
-  bintrayUser = System.getenv('BINTRAY_USER') ?: ''
-  bintrayKey = System.getenv('BINTRAY_KEY') ?: ''
-}
+apply plugin: "com.vanniktech.maven.publish"

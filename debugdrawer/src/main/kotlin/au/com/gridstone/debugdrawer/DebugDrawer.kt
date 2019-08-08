@@ -208,9 +208,9 @@ object DebugDrawer {
       activity.application.unregisterActivityLifecycleCallbacks(this)
     }
 
-    override fun onActivityPaused(activity: Activity?) {}
-    override fun onActivityResumed(activity: Activity?) {}
-    override fun onActivitySaveInstanceState(activity: Activity?, outState: Bundle?) {}
-    override fun onActivityCreated(activity: Activity?, savedInstanceState: Bundle?) {}
+    override fun onActivityPaused(activity: Activity) {}
+    override fun onActivityResumed(activity: Activity) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
   }
 }

@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+Version 0.9.6
+-------------
+
+- Add support for window insets on all edges (great for apps supporting edge-to-edge).
+- Remove the need to call `LumberYard.install()` when using the Timber module.
+- Remove the `timber-no-op` module; there's no code that needs to be included in release builds now.
+- Add temporary LeakCanary2 module to make use of it while it's in beta.
+- Fix bug where resource IDs would display as errors in Android Studio.
+- Migrate deployment to Maven Central.
+
 Version 0.9.5
 -------------
 

@@ -159,27 +159,27 @@ looking at an example, so check out `sample-app` to see it in action.
 Download
 --------
 
-All artifacts are up on jcenter.
+All artifacts are up on Maven Central.
 
 For the main library
 ```
-au.com.gridstone.debugdrawer:debugdrawer:0.9.4
+au.com.gridstone.debugdrawer:debugdrawer:0.9.6
 ```
 For the LeakCanary module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.4
+au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.6
 ```
 For the Retrofit module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.4
+au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.6
 ```
 For the Timber module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.4
+au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.6
 ```
 For the OkHttp logger
 ```
-au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.4
+au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.6
 ```
 
 Contributing

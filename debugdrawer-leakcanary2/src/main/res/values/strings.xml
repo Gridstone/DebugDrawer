@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <string name="drawer_leakcanaryButton">Leak analysis</string>
+  <string name="drawer_leakcanaryButton">View leaks</string>
+  <string name="drawer_leakcanaryToggleLabel">Enable heap dumps</string>
 </resources>

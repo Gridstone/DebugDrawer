@@ -69,6 +69,7 @@ object AppConfiguration {
         .addSectionTitle("Logs")
         .addModule(OkHttpLoggerModule(httpLogger))
         .addModule(TimberModule())
+        .addSectionTitle("Leaks")
         .addModule(LeakCanaryModule)
         .addSectionTitle("Device information")
         .addModule(DeviceInfoModule())

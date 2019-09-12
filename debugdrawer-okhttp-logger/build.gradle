@@ -13,13 +13,18 @@ android {
     main.java.srcDirs += 'src/main/kotlin'
   }
 
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
   libraryVariants.all {
     it.generateBuildConfig.enabled = false
   }
 
   dependencies {
     implementation project(':debugdrawer')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
     implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"
     implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
     implementation "com.jakewharton.timber:timber:${versions.timber}"

@@ -13,12 +13,17 @@ android {
     main.java.srcDirs += 'src/main/kotlin'
   }
 
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
   libraryVariants.all {
     it.generateBuildConfig.enabled = false
   }
 
   dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
     implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   }
 }

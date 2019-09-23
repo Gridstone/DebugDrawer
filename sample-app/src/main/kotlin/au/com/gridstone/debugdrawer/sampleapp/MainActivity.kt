@@ -10,8 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.get
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.AppConfiguration.getRootViewContainerFor
@@ -40,10 +41,10 @@ class MainActivity : AppCompatActivity() {
     recycler.layoutManager = LinearLayoutManager(this)
 
     val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
-    val viewModel: GamesViewModel = ViewModelProviders.of(this).get(GamesViewModel::class.java)
+    val viewModel: GamesViewModel = ViewModelProviders.of(this).get()
 
     // Observe ViewModel state and change UI accordingly.
-    viewModel.states.observe(this, Observer { state ->
+    viewModel.states.observe(this) { state ->
       when (state) {
         State.Idle, State.Loading -> viewAnimator.displayedChild = 0
 
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
           viewAnimator.displayedChild = 2
         }
       }
-    })
+    }
 
     // Put refresh button in toolbar menu and have it refresh the games list.
     toolbar.inflateMenu(R.menu.home)

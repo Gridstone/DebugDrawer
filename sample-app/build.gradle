@@ -24,10 +24,15 @@ android {
     debug.java.srcDirs += 'src/debug/kotlin'
     release.java.srcDirs += 'src/release/kotlin'
   }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
   implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
   debugImplementation project(':debugdrawer')
   debugImplementation project(':debugdrawer-leakcanary2')
@@ -38,7 +43,7 @@ dependencies {
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
-  implementation "androidx.lifecycle:lifecycle-livedata:${versions.lifecycle}"
+  implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
   implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
   debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary2}"
   implementation "com.squareup.moshi:moshi:${versions.moshi}"

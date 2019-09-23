@@ -4,12 +4,15 @@ import android.app.Activity
 import android.app.Application.ActivityLifecycleCallbacks
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.util.SparseArray
 import android.view.ContextThemeWrapper
 import android.view.Gravity.END
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.LAYOUT_DIRECTION_RTL
 import android.view.View.OnApplyWindowInsetsListener
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -150,6 +153,25 @@ object DebugDrawer {
       // us to update the drawer's padding accordingly.
       val insetListener = InsetListener(drawerContentScrollView, drawerContent)
       container.setOnApplyWindowInsetsListener(insetListener)
+
+      // Exclude gestures on the top 200dp on the end-side of the DrawerLayout. This allows the
+      // drawer to be revealed even with gesture navigation enabled.
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        drawerLayout.doOnLayout { view ->
+          val rect = Rect(0, 0, 0, view.dpToPx(200))
+          val isRtl = view.resources.configuration.layoutDirection == LAYOUT_DIRECTION_RTL
+
+          if (isRtl) {
+            rect.left = 0
+            rect.right = view.dpToPx(32)
+          } else {
+            rect.left = view.width - view.dpToPx(32)
+            rect.right = view.width
+          }
+
+          view.systemGestureExclusionRects = listOf(rect)
+        }
+      }
 
       // Add the DrawerLayout to the activity, register lifecycle callbacks to inform modules of
       // attach/detach events, and return the main container the activity can use to push and pop

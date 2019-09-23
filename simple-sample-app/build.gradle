@@ -24,9 +24,14 @@ android {
     debug.java.srcDirs += 'src/debug/kotlin'
     release.java.srcDirs += 'src/release/kotlin'
   }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 dependencies {
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
   debugImplementation project(':debugdrawer')
 }

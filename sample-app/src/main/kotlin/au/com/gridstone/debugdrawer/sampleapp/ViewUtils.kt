@@ -19,7 +19,7 @@ fun View.updatePaddingWithInsets(left: Boolean = false,
   }
 }
 
-private inline fun View.doOnApplyWindowInsets(crossinline block: (insets: WindowInsets, padding: Rect) -> Unit) {
+inline fun View.doOnApplyWindowInsets(crossinline block: (insets: WindowInsets, padding: Rect) -> Unit) {
   // Create a snapshot of padding.
   val initialPadding = Rect(paddingLeft, paddingTop, paddingRight, paddingBottom)
 
@@ -29,10 +29,6 @@ private inline fun View.doOnApplyWindowInsets(crossinline block: (insets: Window
     return@setOnApplyWindowInsetsListener insets
   }
 
-  requestApplyInsetsWhenAttached()
-}
-
-private fun View.requestApplyInsetsWhenAttached() {
   if (isAttachedToWindow) {
     // We're already attached, just request as normal.
     requestApplyInsets()

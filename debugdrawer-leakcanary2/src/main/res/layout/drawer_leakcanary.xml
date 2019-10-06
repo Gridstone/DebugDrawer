@@ -19,7 +19,7 @@
       android:layout_gravity="start|center_vertical|fill_horizontal"
       />
 
-  <Button
+  <android.widget.Button
       android:id="@+id/drawer_leakcanaryViewButton"
       android:layout_width="0dp"
       android:layout_columnSpan="2"

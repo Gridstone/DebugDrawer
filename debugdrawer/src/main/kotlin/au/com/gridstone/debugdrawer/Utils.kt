@@ -12,9 +12,11 @@ import android.view.WindowInsets
 internal fun Resources.dpToPx(dp: Int) = (dp * displayMetrics.density).toInt()
 internal fun View.dpToPx(dp: Int): Int = resources.dpToPx(dp)
 
-@Suppress("UNCHECKED_CAST")
-internal fun <V : View> ViewGroup.inflate(layoutRes: Int, attach: Boolean = false): V =
-    LayoutInflater.from(context).inflate(layoutRes, this, attach) as V
+inline fun <reified T : View> ViewGroup.inflate(layout: Int, attach: Boolean = false): T {
+  val view: View = LayoutInflater.from(context).inflate(layout, this, attach)
+  require(view is T) { "Inflated view does not match the target type." }
+  return view
+}
 
 internal fun View.isRtl(): Boolean = layoutDirection == LayoutDirection.RTL
 

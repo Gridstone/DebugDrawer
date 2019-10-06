@@ -3,27 +3,18 @@ package au.com.gridstone.debugdrawer.sampleapp
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Error
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Idle
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Loading
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State.Success
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import kotlin.coroutines.CoroutineContext
 
-class GamesViewModel : ViewModel(), CoroutineScope {
+class GamesViewModel : ViewModel() {
 
-  private val mutableStates: MutableLiveData<State> = MutableLiveData()
-  override val coroutineContext: CoroutineContext = Job() + Dispatchers.Main
+  private val mutableStates: MutableLiveData<State> = MutableLiveData(Idle)
   val states: LiveData<State> = mutableStates
-
-  init {
-    mutableStates.value = Idle
-  }
 
   fun refreshIfNecessary() {
     if (mutableStates.value is Idle || mutableStates.value is Error) {
@@ -34,7 +25,7 @@ class GamesViewModel : ViewModel(), CoroutineScope {
   fun refresh() {
     mutableStates.value = Loading
 
-    launch {
+    viewModelScope.launch {
 
       Timber.v("Fetching games list...")
       val api: GamesApi = AppConfiguration.api
@@ -48,10 +39,6 @@ class GamesViewModel : ViewModel(), CoroutineScope {
         mutableStates.postValue(Error)
       }
     }
-  }
-
-  override fun onCleared() {
-    coroutineContext.cancel()
   }
 
   sealed class State {

@@ -1,16 +1,22 @@
 package au.com.gridstone.debugdrawer
 
 import android.content.res.Resources
+import android.util.LayoutDirection
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnAttachStateChangeListener
 import android.view.ViewGroup
+import android.view.WindowInsets
 
 internal fun Resources.dpToPx(dp: Int) = (dp * displayMetrics.density).toInt()
 internal fun View.dpToPx(dp: Int): Int = resources.dpToPx(dp)
 
-internal fun ViewGroup.inflate(layoutRes: Int, attach: Boolean = false) =
-    LayoutInflater.from(context).inflate(layoutRes, this, false)
+@Suppress("UNCHECKED_CAST")
+internal fun <V : View> ViewGroup.inflate(layoutRes: Int, attach: Boolean = false): V =
+    LayoutInflater.from(context).inflate(layoutRes, this, attach) as V
+
+internal fun View.isRtl(): Boolean = layoutDirection == LayoutDirection.RTL
 
 internal inline fun View.doOnLayout(crossinline action: (view: View) -> Unit) {
   if (isLaidOut && !isLayoutRequested) {
@@ -31,6 +37,28 @@ internal inline fun View.doOnLayout(crossinline action: (view: View) -> Unit) {
         view.removeOnLayoutChangeListener(this)
         action(view)
       }
+    })
+  }
+}
+
+internal inline fun View.doOnApplyWindowInsets(crossinline block: (v: View, insets: WindowInsets) -> Unit) {
+  setOnApplyWindowInsetsListener { v, insets ->
+    block(v, insets)
+    insets
+  }
+
+  if (isAttachedToWindow) {
+    // We're already attached, just request as normal.
+    requestApplyInsets()
+  } else {
+    // We're not attached to the hierarchy. Add a listener to request when we are.
+    addOnAttachStateChangeListener(object : OnAttachStateChangeListener {
+      override fun onViewAttachedToWindow(v: View) {
+        v.removeOnAttachStateChangeListener(this)
+        v.requestApplyInsets()
+      }
+
+      override fun onViewDetachedFromWindow(v: View) = Unit
     })
   }
 }

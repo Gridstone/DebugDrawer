@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    // Render under the status and navigation bars.
+    window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
+        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+
     // Get root container to put our app's UI in. For a debug build this will have our debug drawer.
     // For a release build this will be the Activity's root container.
     val container: ViewGroup = getRootViewContainerFor(this)
@@ -39,12 +45,6 @@ class MainActivity : AppCompatActivity() {
     val adapter = GamesAdapter()
     recycler.adapter = adapter
     recycler.layoutManager = LinearLayoutManager(this)
-
-    // Render under the status and navigation bars.
-    window.decorView.systemUiVisibility = window.decorView.systemUiVisibility or
-        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
 
     // Make children respond to window insets.
     val appBar: View = findViewById(R.id.home_appBar)

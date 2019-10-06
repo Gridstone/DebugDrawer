@@ -2,7 +2,6 @@ package au.com.gridstone.debugdrawer
 
 import android.app.Activity
 import android.app.Application.ActivityLifecycleCallbacks
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Build
@@ -10,14 +9,10 @@ import android.os.Bundle
 import android.util.SparseArray
 import android.view.ContextThemeWrapper
 import android.view.Gravity.END
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.LAYOUT_DIRECTION_RTL
-import android.view.View.OnApplyWindowInsetsListener
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.WindowInsets
 import android.widget.FrameLayout
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.drawerlayout.widget.DrawerLayout
@@ -114,31 +109,39 @@ object DebugDrawer {
       val container: ViewGroup = mainContainer ?: FrameLayout(activity)
       drawerLayout.addView(container)
 
+      // Create a ScrollView to house the drawer content.
       val themedContext = ContextThemeWrapper(activity, R.style.Theme_DebugDrawer)
-      val inflater = LayoutInflater.from(themedContext)
-
-      // Create the ScrollView that will house the debug drawer content and add it to DrawerLayout.
-      val drawerContentScrollView = DrawerScrollView(themedContext)
+      val scrollView = ScrollView(themedContext)
       val params = DrawerLayout.LayoutParams(drawerLayout.dpToPx(290), MATCH_PARENT, END)
-      drawerContentScrollView.layoutParams = params
-      drawerContentScrollView.id = R.id.debugDrawerScrollId
-      drawerContentScrollView.setBackgroundColor(Color.rgb(66, 66, 66))
-      drawerLayout.addView(drawerContentScrollView)
+      scrollView.layoutParams = params
+      scrollView.id = R.id.debugDrawerScrollId
+      scrollView.setBackgroundColor(Color.rgb(66, 66, 66))
+      scrollView.clipToPadding = false
+
+      // If the main container is dealing with window insets then update the ScrollView's
+      // padding accordingly.
+      container.doOnApplyWindowInsets { v, insets ->
+        val leftPadding: Int = if (v.isRtl()) insets.systemWindowInsetLeft else -1
+        val rightPadding: Int = if (v.isRtl()) -1 else insets.systemWindowInsetRight
+        scrollView.setPadding(
+            leftPadding,
+            insets.systemWindowInsetTop,
+            rightPadding,
+            insets.systemWindowInsetBottom)
+      }
+
+      drawerLayout.addView(scrollView)
 
       // Create and add the drawer content container to the scroll view.
-      val drawerContent: ViewGroup = inflater
-          .inflate(R.layout.drawer_content, drawerContentScrollView, false) as ViewGroup
-
-      drawerContentScrollView.addView(drawerContent)
+      val drawerContent: ViewGroup = scrollView.inflate(R.layout.drawer_content)
+      scrollView.addView(drawerContent)
 
       // Add all section titles and modules to the content view.
       for (i in 0 until index) {
         val title: String? = sectionTitles[i]
 
         if (title != null) {
-          val titleView: TextView =
-              inflater.inflate(R.layout.drawer_module_title, drawerContent, false) as TextView
-
+          val titleView: TextView = drawerContent.inflate(R.layout.drawer_module_title)
           titleView.text = title
           drawerContent.addView(titleView)
           continue
@@ -149,19 +152,13 @@ object DebugDrawer {
         drawerContent.addView(module.onCreateView(drawerContent))
       }
 
-      // If the main container is dealing with window insets then we want to know. It will allow
-      // us to update the drawer's padding accordingly.
-      val insetListener = InsetListener(drawerContentScrollView, drawerContent)
-      container.setOnApplyWindowInsetsListener(insetListener)
-
       // Exclude gestures on the top 200dp on the end-side of the DrawerLayout. This allows the
       // drawer to be revealed even with gesture navigation enabled.
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         drawerLayout.doOnLayout { view ->
           val rect = Rect(0, 0, 0, view.dpToPx(200))
-          val isRtl = view.resources.configuration.layoutDirection == LAYOUT_DIRECTION_RTL
 
-          if (isRtl) {
+          if (view.isRtl()) {
             rect.left = 0
             rect.right = view.dpToPx(32)
           } else {
@@ -179,31 +176,6 @@ object DebugDrawer {
       activity.setContentView(drawerLayout)
       activity.application.registerActivityLifecycleCallbacks(LifecycleListener(modules.toSet()))
       return container
-    }
-  }
-
-  /**
-   * Keep track of window insets and apply some additional padding to the drawer if it's being
-   * rendered behind window insets.
-   */
-  private class InsetListener(
-      private val scrollView: DrawerScrollView,
-      private val drawerContentContainer: View) : OnApplyWindowInsetsListener {
-
-    override fun onApplyWindowInsets(v: View, insets: WindowInsets): WindowInsets {
-      scrollView.setStatusBarHeight(insets.systemWindowInsetTop)
-
-      val resources: Resources = v.resources
-      val horizontalPadding: Int = resources.getDimensionPixelSize(R.dimen.drawerHorizontalPadding)
-      val verticalPadding: Int = resources.getDimensionPixelSize(R.dimen.drawerVerticalPadding)
-
-      drawerContentContainer.setPadding(
-          horizontalPadding + insets.systemWindowInsetLeft,
-          verticalPadding + insets.systemWindowInsetTop,
-          horizontalPadding + insets.systemWindowInsetRight,
-          verticalPadding + insets.systemWindowInsetBottom)
-
-      return insets
     }
   }
 

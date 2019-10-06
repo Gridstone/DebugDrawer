@@ -2,6 +2,14 @@
 
 <resources>
   <color name="primary">#4caf50</color>
-  <color name="primaryDark">#087f23</color>
-  <color name="accent">#ff9100</color>
+  <color name="primaryVariant">#087f23</color>
+  <color name="secondary">#ff9100</color>
+  <color name="onSecondary">#ffffff</color>
+  <color name="onPrimary">#ffffff</color>
+  <color name="background">#ffffff</color>
+  <color name="onBackground">#000000</color>
+  <color name="surface">#ffffff</color>
+  <color name="onSurface">#000000</color>
+  <color name="statusBar">#22000000</color>
+  <color name="navigationBar">#444caf50</color>
 </resources>

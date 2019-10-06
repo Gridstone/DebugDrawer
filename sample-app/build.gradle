@@ -39,6 +39,7 @@ dependencies {
   debugImplementation project(':debugdrawer-retrofit')
   debugImplementation project(':debugdrawer-okhttp-logger')
   debugImplementation project(':debugdrawer-timber')
+  implementation "androidx.core:core-ktx:${versions.androidx_core}"
   implementation "androidx.appcompat:appcompat:${versions.appcompat}"
   implementation "androidx.drawerlayout:drawerlayout:${versions.drawerlayout}"
   implementation "com.google.android.material:material:${versions.material}"

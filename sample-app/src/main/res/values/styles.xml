@@ -4,14 +4,20 @@
 
   <style
       name="Theme.DrawerLayout.SampleApp"
-      parent="Theme.AppCompat.Light.NoActionBar"
+      parent="Theme.MaterialComponents.DayNight.NoActionBar"
       >
 
-    <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-    <item name="android:statusBarColor">@android:color/transparent</item>
     <item name="colorPrimary">@color/primary</item>
-    <item name="colorPrimaryDark">@color/primaryDark</item>
-    <item name="colorAccent">@color/accent</item>
+    <item name="colorPrimaryVariant">@color/primaryVariant</item>
+    <item name="colorOnPrimary">@color/onPrimary</item>
+    <item name="colorSecondary">@color/secondary</item>
+    <item name="colorOnSecondary">@color/onSecondary</item>
+    <item name="android:colorBackground">@color/background</item>
+    <item name="colorOnBackground">@color/onBackground</item>
+    <item name="colorSurface">@color/surface</item>
+    <item name="colorOnSurface">@color/onSurface</item>
+    <item name="android:statusBarColor">@color/statusBar</item>
+    <item name="android:navigationBarColor">@color/navigationBar</item>
 
   </style>
 

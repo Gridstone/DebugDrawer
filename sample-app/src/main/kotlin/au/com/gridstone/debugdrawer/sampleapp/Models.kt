@@ -7,7 +7,7 @@ data class Game(val id: Long,
                 val aliases: String?,
                 val deck: String,
                 val image: Image,
-                val original_release_date: String,
+                val original_release_date: String?,
                 val platforms: List<Platform>)
 
 data class Platform(val name: String)

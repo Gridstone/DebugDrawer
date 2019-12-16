@@ -1,27 +1,45 @@
 package au.com.gridstone.debugdrawer.leakcanary
 
-import android.content.Intent
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Switch
 import au.com.gridstone.debugdrawer.DebugDrawerModule
-import com.squareup.leakcanary.internal.DisplayLeakActivity
+import leakcanary.LeakCanary
 
-/**
- * Displays a button in the drawer to open LeakCanary's leak list activity. Note that including this
- * module in your project removes the LeakCanary launcher icon, effectively making the debug
- * drawer the main entry point into your leak list.
- */
-class LeakCanaryModule : DebugDrawerModule {
+object LeakCanaryModule : DebugDrawerModule {
+
+  private const val SHARED_PREFS_NAME = "DebugDrawer_LeakCanary"
+  private const val KEY_ENABLE_HEAP_DUMPS = "enableHeapDumps"
+
+  override fun onAttach(context: Context) {
+    val sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, true)
+    LeakCanary.config = LeakCanary.config.copy(dumpHeap = enableHeapDumps)
+  }
 
   override fun onCreateView(parent: ViewGroup): View {
-    val button = Button(parent.context)
-    button.setText(R.string.drawer_leakcanaryButton)
-    button.setOnClickListener {
-      val intent = Intent(parent.context, DisplayLeakActivity::class.java)
-      parent.context.startActivity(intent)
+    val inflater = LayoutInflater.from(parent.context)
+    val view: View = inflater.inflate(R.layout.drawer_leakcanary, parent, false)
+
+    val sharedPrefs = parent.context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, true)
+
+    val toggle: Switch = view.findViewById(R.id.drawer_leakcanaryToggle)
+    toggle.isChecked = enableHeapDumps
+    toggle.setOnCheckedChangeListener { _, checked ->
+      LeakCanary.config = LeakCanary.config.copy(dumpHeap = checked)
+      sharedPrefs.edit().putBoolean(KEY_ENABLE_HEAP_DUMPS, checked).apply()
     }
 
-    return button
+    val button: Button = view.findViewById(R.id.drawer_leakcanaryViewButton)
+    button.setOnClickListener {
+      parent.context.startActivity(LeakCanary.newLeakDisplayActivityIntent())
+    }
+
+    return view
   }
 }

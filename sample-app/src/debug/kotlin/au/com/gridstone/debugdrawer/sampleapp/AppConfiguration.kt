@@ -13,7 +13,6 @@ import au.com.gridstone.debugdrawer.retrofit.Endpoint
 import au.com.gridstone.debugdrawer.retrofit.RetrofitModule
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
 import au.com.gridstone.debugdrawer.timber.TimberModule
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -57,7 +56,6 @@ object AppConfiguration {
         .baseUrl(currentEndpoint.url)
         .client(httpClient)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
     if (currentEndpoint.isMock) {

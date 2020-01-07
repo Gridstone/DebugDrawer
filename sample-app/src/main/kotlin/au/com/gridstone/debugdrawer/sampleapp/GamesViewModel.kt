@@ -31,7 +31,7 @@ class GamesViewModel : ViewModel() {
       val api: GamesApi = AppConfiguration.api
 
       try {
-        val response: GamesResponse = api.getGames().await()
+        val response: GamesResponse = api.getGames()
         mutableStates.postValue(Success(response.results))
         Timber.v("Fetched games list successfully.")
       } catch (e: Exception) {

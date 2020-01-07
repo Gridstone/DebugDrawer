@@ -1,6 +1,5 @@
 package au.com.gridstone.debugdrawer.sampleapp
 
-import kotlinx.coroutines.Deferred
 import retrofit2.mock.BehaviorDelegate
 import retrofit2.mock.MockRetrofit
 
@@ -8,7 +7,7 @@ class MockGamesApi(mockRetrofit: MockRetrofit) : GamesApi {
   private val delegate: BehaviorDelegate<GamesApi> =
       mockRetrofit.create(GamesApi::class.java)
 
-  override fun getGames(): Deferred<GamesResponse> {
+  override suspend fun getGames(): GamesResponse {
     val response = GamesResponse(mockGames)
     return delegate.returningResponse(response).getGames()
   }

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.view.ViewGroup
 import au.com.gridstone.debugdrawer.sampleapp.HttpConfiguration.API_URL
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
@@ -26,7 +25,6 @@ object AppConfiguration {
         .baseUrl(API_URL)
         .client(HttpConfiguration.client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
         .create(GamesApi::class.java)
   }

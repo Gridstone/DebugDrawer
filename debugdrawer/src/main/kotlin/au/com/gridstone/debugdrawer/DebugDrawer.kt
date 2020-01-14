@@ -15,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.annotation.StringRes
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 
 /**
@@ -47,6 +48,32 @@ object DebugDrawer {
    * Begin building a debug drawer for the specified activity.
    */
   fun with(activity: Activity): Builder = Builder(activity)
+
+  /**
+   * Closes the debug drawer if one has been installed in the activity.
+   * Returns true if the DrawLayout was closed.
+   */
+  fun closeIn(activity: Activity): Boolean {
+    activity.findViewById<DrawerLayout?>(R.id.debugDrawerId)?.let { layout ->
+      layout.closeDrawer(GravityCompat.END)
+      return true
+    }
+
+    return false
+  }
+
+  /**
+   * Opens the debug drawer if one has been installed in the activity.
+   * Returns true if the DrawLayout was opened.
+   */
+  fun openIn(activity: Activity): Boolean {
+    activity.findViewById<DrawerLayout?>(R.id.debugDrawerId)?.let { layout ->
+      layout.openDrawer(GravityCompat.END)
+      return true
+    }
+
+    return false
+  }
 
   /**
    * Used to configure and build a debug drawer.

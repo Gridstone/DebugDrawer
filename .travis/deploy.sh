@@ -13,7 +13,7 @@ else
   echo signing.password="${GPG_KEY_PASSPHRASE}" >> "$HOME/.gradle/gradle.properties"
   echo signing.secretKeyRingFile="${TRAVIS_BUILD_DIR}/my.travis.gpg" >> "$HOME/.gradle/gradle.properties"
 
-  ./gradlew uploadArchives --info --no-daemon --no-parallel
+  ./gradlew androidSourcesJar androidJavadocsJar uploadArchives --info --no-daemon --no-parallel
 
   echo "Deployed!"
 fi

@@ -97,15 +97,8 @@ Provided modules
 
 LeakCanary is a fantastic tool for detecting memory leaks in your app. The only problem with it is
 how it adds a launcher icon for each app you have installed that uses it. This module takes care of
-removing that launcher icon and cages LeakCanary in the debug drawer.
-
-The only requirement for using this module is that you're calling
-```kotlin
-override fun onCreate() {
-  LeakCanary.install(this)
-}
-```
-in your `Application` class as per LeakCanary's documentation.
+removing that launcher icon and cages LeakCanary in the debug drawer. It also provides a handy
+switch for toggling heap dumps on and off.
 
 ### Timber
 
@@ -120,9 +113,9 @@ provides a dropdown menu in the drawer to select what level of logging you'd lik
 HTTP requests. It relies on you using OkHttp as your HTTP client, and pipes its output into Timber.
 
 To use it, first add
-[HttpLogger.interceptor](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/HttpLogger.kt)
+[HttpLogger.interceptor](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/okhttplogs/HttpLogger.kt)
 as an interceptor to your `OkHttpClient`. Then pass `HttpLogger` on to
-[OkHttpLoggerModule](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/OkHttpLoggerModule.kt).
+[OkHttpLoggerModule](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-okhttp-logger/src/main/kotlin/au/com/gridstone/debugdrawer/okhttplogs/OkHttpLoggerModule.kt).
 
 ### Device info
 
@@ -142,17 +135,17 @@ and often you might want to configure its behaviour. This is useful if you make 
 such as development, staging, or production.
 
 To begin, you must create a list of
-[`Endpoints`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/Endpoint.kt).
+[`Endpoints`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/retrofit/Endpoint.kt).
 This list might include entries such as `staging`, or `mock`.
 
 Next, create an instance of
-[`DebugRetrofitConfig`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/DebugRetrofitConfig.kt).
+[`DebugRetrofitConfig`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/retrofit/DebugRetrofitConfig.kt).
 This class takes care of persisting settings between app launches, and forwarding any runtime
 modifications to `NetworkBehavior`. It also ensures that when you select a new `Endpoint` your
 entire app process is restarted.
 
 Finally, you can add
-[`RetrofitModule`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/RetrofitModule.kt)
+[`RetrofitModule`](https://github.com/Gridstone/DebugDrawer/blob/master/debugdrawer-retrofit/src/main/kotlin/au/com/gridstone/debugdrawer/retrofit/RetrofitModule.kt)
 to your debug drawer builder and it will take care of the rest. It might be easier to understand by
 looking at an example, so check out `sample-app` to see it in action.
 
@@ -163,23 +156,33 @@ All artifacts are up on Maven Central.
 
 For the main library
 ```
-au.com.gridstone.debugdrawer:debugdrawer:0.9.6
+au.com.gridstone.debugdrawer:debugdrawer:0.9.7
 ```
 For the LeakCanary module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.6
+au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.7
 ```
 For the Retrofit module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.6
+au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.7
 ```
 For the Timber module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.6
+au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.7
 ```
 For the OkHttp logger
 ```
-au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.6
+au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.7
+```
+### Snapshots
+
+Snapshots are also available by adding the repository
+```groovy
+maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+```
+Letting you specify
+```
+au.com.gridstone.debugdrawer:debugdrawer:0.9.8-SNAPSHOT
 ```
 
 Contributing

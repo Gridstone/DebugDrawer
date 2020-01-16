@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+Version 0.9.7
+-------------
+
+- Add support for gesture navigation (you can now swipe on the top edge of the screen to open the debug drawer)
+- Hopefully fix sources not getting uploaded to Maven Central
+- Add `DebugDrawer.openIn()` and `closeIn()` functions
+- Consolidate LeakCanary modules back into one, now supporting `2.1`
+- Add heap dump toggle switch to LeakCanary module
+- Fix appearance of button in LeakCanary module
+
 Version 0.9.6
 -------------
 

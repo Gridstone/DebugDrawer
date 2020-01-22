@@ -50,7 +50,9 @@ when push/popping `Fragments` or `Controllers` or whatever you fancy. For your d
 container will be inside of a
 [`DrawerLayout`](https://developer.android.com/reference/androidx/drawerlayout/widget/DrawerLayout),
 allowing you to swipe from the "end" edge of your screen to get access to debug settings. For
-release builds you'll be pushing views into the root container as normal.
+release builds you'll be pushing views into the root container as normal. If you have gesture
+navigation enabled, you can swipe in from the top 200dp of the screen to reveal the drawer instead
+of navigating back.
 
 ### Making new modules
 

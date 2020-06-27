@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.GamesAdapter.ViewHolder
-import com.squareup.picasso.Picasso
+import coil.api.load
 
 class GamesAdapter : RecyclerView.Adapter<ViewHolder>() {
   private var games: List<Game> = emptyList()
@@ -36,13 +36,11 @@ class GamesAdapter : RecyclerView.Adapter<ViewHolder>() {
     fun bindTo(game: Game) {
       nameView.text = game.name
 
-      Picasso.get()
-          .load(game.image.small_url)
-          .fit()
-          .centerCrop()
-          .placeholder(R.drawable.gfx_controller)
-          .error(R.drawable.gfx_dead_link_small)
-          .into(imageView)
+      imageView.load(game.image.small_url) {
+        placeholder(R.drawable.gfx_controller)
+        error(R.drawable.gfx_dead_link_small)
+        crossfade(true)
+      }
     }
   }
 }

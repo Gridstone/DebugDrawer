@@ -18,6 +18,10 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
+  kotlinOptions {
+    jvmTarget = JavaVersion.VERSION_1_8
+  }
+
   libraryVariants.all {
     it.generateBuildConfig.enabled = false
   }

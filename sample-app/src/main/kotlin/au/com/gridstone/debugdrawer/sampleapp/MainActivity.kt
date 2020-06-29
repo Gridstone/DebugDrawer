@@ -10,14 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.AppConfiguration.getRootViewContainerFor
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State
-import com.squareup.picasso.Picasso
+import coil.api.load
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     recycler.updatePaddingWithInsets(left = true, right = true, bottom = true)
 
     val viewAnimator: ViewAnimator = findViewById(R.id.games_viewAnimator)
-    val viewModel: GamesViewModel = ViewModelProviders.of(this).get()
+    val viewModel: GamesViewModel = ViewModelProvider(this).get()
 
     // Observe ViewModel state and change UI accordingly.
     viewModel.states.observe(this) { state ->
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         State.Error -> {
           viewAnimator.displayedChild = 1
           val errorImageView: ImageView = findViewById(R.id.games_error_image)
-          Picasso.get().load(R.drawable.gfx_dead_link_small).into(errorImageView)
+          errorImageView.load(R.drawable.gfx_dead_link_small)
         }
 
         is State.Success -> {
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
   override fun onStart() {
     super.onStart()
 
-    val viewModel: GamesViewModel = ViewModelProviders.of(this).get()
+    val viewModel: GamesViewModel = ViewModelProvider(this).get()
     viewModel.refreshIfNecessary()
   }
 }

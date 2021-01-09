@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.GamesAdapter.ViewHolder
-import coil.api.load
+import coil.load
 
 class GamesAdapter : RecyclerView.Adapter<ViewHolder>() {
   private var games: List<Game> = emptyList()

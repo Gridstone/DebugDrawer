@@ -50,7 +50,7 @@ dependencies {
   implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
   implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
   implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-  debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary2}"
+  debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
   implementation "com.squareup.moshi:moshi:${versions.moshi}"
   implementation "com.squareup.moshi:moshi-kotlin:${versions.moshi}"
   implementation "com.squareup.okhttp3:okhttp:${versions.okhttp}"

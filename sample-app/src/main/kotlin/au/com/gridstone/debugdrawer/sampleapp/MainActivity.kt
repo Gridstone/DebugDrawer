@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import au.com.gridstone.debugdrawer.sampleapp.AppConfiguration.getRootViewContainerFor
 import au.com.gridstone.debugdrawer.sampleapp.GamesViewModel.State
-import coil.api.load
+import coil.load
 
 class MainActivity : AppCompatActivity() {
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
     // Make children respond to window insets.
     val appBar: View = findViewById(R.id.home_appBar)
     val loadingView: View = findViewById(R.id.games_loading)
-    val errorView: View = findViewById(R.id.games_loading)
+    val errorView: View = findViewById(R.id.games_error)
     appBar.updatePaddingWithInsets(left = true, top = true, right = true)
     loadingView.updatePaddingWithInsets(left = true, right = true, bottom = true)
     errorView.updatePaddingWithInsets(left = true, right = true, bottom = true)

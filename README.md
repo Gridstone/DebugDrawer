@@ -1,6 +1,7 @@
 DebugDrawer
 ===========
 [![Android CI](https://github.com/Gridstone/DebugDrawer/actions/workflows/android.yml/badge.svg)](https://github.com/Gridstone/DebugDrawer/actions/workflows/android.yml)
+[![Release](https://img.shields.io/github/v/release/Gridstone/DebugDrawer.svg?include_prereleases)](https://github.com/Gridstone/DebugDrawer/releases)
 
 <img src="art/video_sample.gif" title="Animated example." align="right"/>
 
@@ -159,24 +160,27 @@ All artifacts are up on Maven Central.
 
 For the main library
 ```
-au.com.gridstone.debugdrawer:debugdrawer:0.9.7
+au.com.gridstone.debugdrawer:debugdrawer:<version>
 ```
 For the LeakCanary module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-leakcanary:0.9.7
+au.com.gridstone.debugdrawer:debugdrawer-leakcanary:<version>
 ```
 For the Retrofit module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-retrofit:0.9.7
+au.com.gridstone.debugdrawer:debugdrawer-retrofit:<version>
 ```
 For the Timber module
 ```
-au.com.gridstone.debugdrawer:debugdrawer-timber:0.9.7
+au.com.gridstone.debugdrawer:debugdrawer-timber:<version>
 ```
 For the OkHttp logger
 ```
-au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:0.9.7
+au.com.gridstone.debugdrawer:debugdrawer-okhttp-logger:<version>
 ```
+
+latest stable version is [![Release](https://img.shields.io/github/v/release/Gridstone/DebugDrawer.svg?include_prereleases)](https://github.com/Gridstone/DebugDrawer/releases)
+
 ### Snapshots
 
 Snapshots are also available by adding the repository

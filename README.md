@@ -1,5 +1,6 @@
 DebugDrawer
 ===========
+[![Android CI](https://github.com/Gridstone/DebugDrawer/actions/workflows/android.yml/badge.svg)](https://github.com/Gridstone/DebugDrawer/actions/workflows/android.yml)
 
 <img src="art/video_sample.gif" title="Animated example." align="right"/>
 

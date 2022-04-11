@@ -35,12 +35,17 @@ jobs:
         echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
         echo "IS_SNAPSHOT=$IS_SNAPSHOT" >> $GITHUB_ENV
         echo "IS_NEW_VERSION=$IS_NEW_VERSION" >> $GITHUB_ENV
-      
+
+    - name: Generate release notes
+      if: ${{ github.event_name != 'pull_request' && env.IS_SNAPSHOT == 'false'  }}
+      run: ./gradlew -q getChangelog >> RELEASE_NOTES.md
+
     - name: Release on Github
       if: ${{ github.event_name != 'pull_request' && env.IS_SNAPSHOT == 'false' && env.IS_NEW_VERSION == 'true' }}
       uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ env.VERSION_NAME }}
+        body_path: RELEASE_NOTES.md
         files: |
           debugdrawer/build/outputs/aar/debugdrawer-debug.aar
           debugdrawer-leakcanary/build/outputs/aar/debugdrawer-leakcanary-release.aar

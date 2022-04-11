@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: set up JDK 11
       uses: actions/setup-java@v3
       with:
@@ -25,3 +26,24 @@ jobs:
 
     - name: Build with Gradle
       run: ./gradlew build
+      
+    - name: Setup variables for versions
+      run: |
+        VERSION_NAME=`cat gradle.properties | grep "VERSION_NAME" | cut -d'=' -f2`
+        IS_SNAPSHOT=$( [[ "$VERSION_NAME" == *"SNAPSHOT"* ]] && echo "true" || echo "false" )
+        IS_NEW_VERSION=$( git tag -l | grep -q "^$VERSION_NAME$" && echo "false" || echo "true" )
+        echo "VERSION_NAME=$VERSION_NAME" >> $GITHUB_ENV
+        echo "IS_SNAPSHOT=$IS_SNAPSHOT" >> $GITHUB_ENV
+        echo "IS_NEW_VERSION=$IS_NEW_VERSION" >> $GITHUB_ENV
+      
+    - name: Release on Github
+      if: ${{ github.event_name != 'pull_request' && env.IS_SNAPSHOT == 'false' && env.IS_NEW_VERSION == 'true' }}
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ env.VERSION_NAME }}
+        files: |
+          debugdrawer/build/outputs/aar/debugdrawer-debug.aar
+          debugdrawer-leakcanary/build/outputs/aar/debugdrawer-leakcanary-release.aar
+          debugdrawer-okhttp-logger/build/outputs/aar/debugdrawer-okhttp-logger-release.aar
+          debugdrawer-retrofit/build/outputs/aar/debugdrawer-retrofit-release.aar
+          debugdrawer-timber/build/outputs/aar/debugdrawer-timber-release.aar

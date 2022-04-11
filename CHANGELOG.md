@@ -9,7 +9,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Add support for Android 12
 - Update to use latest LeakCanary
 
-## [0.9.7] - 2022-04-11
+## [0.9.7] - 2020-01-16
 
 - Add support for gesture navigation (you can now swipe on the top edge of the screen to open the debug drawer)
 - Hopefully fix sources not getting uploaded to Maven Central

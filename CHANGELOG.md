@@ -1,8 +1,15 @@
-Change Log
-==========
+# Changelog
 
-Version 0.9.7
--------------
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
+adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+- Add support for Android 12
+- Update to use latest LeakCanary
+
+## [0.9.7] - 2022-04-11
 
 - Add support for gesture navigation (you can now swipe on the top edge of the screen to open the debug drawer)
 - Hopefully fix sources not getting uploaded to Maven Central
@@ -11,8 +18,7 @@ Version 0.9.7
 - Add heap dump toggle switch to LeakCanary module
 - Fix appearance of button in LeakCanary module
 
-Version 0.9.6
--------------
+## [0.9.6]
 
 - Add support for window insets on all edges (great for apps supporting edge-to-edge).
 - Remove the need to call `LumberYard.install()` when using the Timber module.
@@ -21,37 +27,31 @@ Version 0.9.6
 - Fix bug where resource IDs would display as errors in Android Studio.
 - Migrate deployment to Maven Central.
 
-Version 0.9.5
--------------
+## [0.9.5]
 
 - Add pretty printing JSON option in HTTP logger module
 
-Version 0.9.4
--------------
+## [0.9.4]
 
 - Fix crash on older versions of Android (at least on API 21 and 22)
 - Fix state restoration of drawer and scroll view
 - Bump various dependencies
 
-Version 0.9.3
--------------
+## [0.9.3]
 
 - Fix bug where Timber logs were not sharing
 - Fix Timber log FileProvider [potentially clashing](https://commonsware.com/blog/2017/06/27/fileprovider-libraries.html) with consuming application
 
-Version 0.9.2
--------------
+## [0.9.2]
 
 - Add OkHttp log interceptor module
 - Bump various dependencies, including AndroidX to the new stable release
 
-Version 0.9.1
--------------
+## [0.9.1]
 
 - Fix drawer not building correctly when no custom container provided in builder.
 
-Version 0.9.0
--------------
+## [0.9.0]
 
 Initial release of DebugDrawer, including modules for
  - Device info: Things like resolution and API level.

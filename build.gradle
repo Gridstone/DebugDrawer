@@ -5,7 +5,7 @@ buildscript {
       'min_sdk'               : 21,
       'android_gradle_plugin' : '4.1.1',
       'kotlin'                : '1.4.21',
-      'maven_publish_plugin'  : '0.13.0',
+      'maven_publish_plugin'  : '0.19.0',
       'dokka'                 : '1.4.20',
       'coroutines'            : '1.4.2',
       'appcompat'             : '1.2.0',

@@ -60,7 +60,7 @@ jobs:
         echo signingInMemoryKey="${GPG_KEY}" >> "$HOME/.gradle/gradle.properties"
         echo mavenCentralUsername="${MAVEN_CENTRAL_USERNAME}" >> "$HOME/.gradle/gradle.properties"
         echo mavenCentralPassword="${MAVEN_CENTRAL_PASSWORD}" >> "$HOME/.gradle/gradle.properties"
-        ./gradlew androidSourcesJar androidJavadocJar publish --info --no-daemon --no-parallel
+        ./gradlew androidSourcesJar androidJavadocJar publish closeAndReleaseRepository --info --no-daemon --no-parallel
       env:
         GPG_PASSWORD: ${{ secrets.GPG_PASSWORD }}
         GPG_KEY: ${{ secrets.GPG_KEY }}

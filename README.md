@@ -56,6 +56,28 @@ release builds you'll be pushing views into the root container as normal. If you
 navigation enabled, you can swipe in from the top 200dp of the screen to reveal the drawer instead
 of navigating back.
 
+### Using with Jetpack Compose
+
+**Activity**
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    val rootContainer = getRootContainerFor(this)
+
+    val composeView = ComposeView(this).apply {
+        layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+
+        setContent {
+            YourTheme {
+                // Your composables
+            }
+        }
+    }
+
+    rootContainer.addView(composeView)
+}
+```
+
 ### Making new modules
 
 You have two options if you want to add custom modules to your drawer. You can implement

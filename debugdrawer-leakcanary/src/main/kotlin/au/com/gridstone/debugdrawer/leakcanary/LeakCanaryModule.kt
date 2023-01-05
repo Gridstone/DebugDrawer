@@ -10,23 +10,25 @@ import android.widget.Switch
 import au.com.gridstone.debugdrawer.DebugDrawerModule
 import leakcanary.LeakCanary
 
-class LeakCanaryModule(
-  private val enableHeapDumpsDefault: Boolean
-) : DebugDrawerModule {
+object LeakCanaryModule : DebugDrawerModule {
 
+  private const val SHARED_PREFS_NAME = "DebugDrawer_LeakCanary"
+  private const val KEY_ENABLE_HEAP_DUMPS = "enableHeapDumps"
+
+  private var enableHeapDumpsByDefault: Boolean = true
+  
   override fun onAttach(context: Context) {
     val sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
-    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsDefault)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsByDefault)
     LeakCanary.config = LeakCanary.config.copy(dumpHeap = enableHeapDumps)
   }
 
-  @SuppressLint("UseSwitchCompatOrMaterialCode")
   override fun onCreateView(parent: ViewGroup): View {
     val inflater = LayoutInflater.from(parent.context)
     val view: View = inflater.inflate(R.layout.drawer_leakcanary, parent, false)
 
     val sharedPrefs = parent.context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
-    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsDefault)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsByDefault)
 
     val toggle: Switch = view.findViewById(R.id.drawer_leakcanaryToggle)
     toggle.isChecked = enableHeapDumps
@@ -42,9 +44,8 @@ class LeakCanaryModule(
 
     return view
   }
-
-  companion object {
-    private const val SHARED_PREFS_NAME = "DebugDrawer_LeakCanary"
-    private const val KEY_ENABLE_HEAP_DUMPS = "enableHeapDumps"
+  
+  fun setEnableHeapDumpsByDefault(enable: Boolean) {
+    enableHeapDumpsByDefault = enable
   }
 }

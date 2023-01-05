@@ -15,9 +15,11 @@ object LeakCanaryModule : DebugDrawerModule {
   private const val SHARED_PREFS_NAME = "DebugDrawer_LeakCanary"
   private const val KEY_ENABLE_HEAP_DUMPS = "enableHeapDumps"
 
+  private var enableHeapDumpsByDefault: Boolean = true
+  
   override fun onAttach(context: Context) {
     val sharedPrefs = context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
-    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, true)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsByDefault)
     LeakCanary.config = LeakCanary.config.copy(dumpHeap = enableHeapDumps)
   }
 
@@ -26,7 +28,7 @@ object LeakCanaryModule : DebugDrawerModule {
     val view: View = inflater.inflate(R.layout.drawer_leakcanary, parent, false)
 
     val sharedPrefs = parent.context.getSharedPreferences(SHARED_PREFS_NAME, MODE_PRIVATE)
-    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, true)
+    val enableHeapDumps = sharedPrefs.getBoolean(KEY_ENABLE_HEAP_DUMPS, enableHeapDumpsByDefault)
 
     val toggle: Switch = view.findViewById(R.id.drawer_leakcanaryToggle)
     toggle.isChecked = enableHeapDumps
@@ -41,5 +43,9 @@ object LeakCanaryModule : DebugDrawerModule {
     }
 
     return view
+  }
+  
+  fun setEnableHeapDumpsByDefault(enable: Boolean) {
+    enableHeapDumpsByDefault = enable
   }
 }
